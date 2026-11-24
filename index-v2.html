@@ -1,0 +1,2499 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Special Notes — Module 5 | O.Nursing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=JetBrains+Mono:wght@500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+/* ---- v3 design system: the research-flashcards template's exact layout,
+   re-skinned in the memo's Navy Medical LIGHT palette ---- */
+:root{
+  --bg-0:#EAF2F8; --bg-1:#F2F7FB;
+  --glass:#ffffff; --glass-brd:#C9D9E8; --glass-brd-hover:#5B8DB8;
+  --txt-hi:#22303C; --txt-mid:#5A6B7C; --txt-lo:#8A9BAE;
+  --navy:#1B3A5C; --navy-d:#122A44; --navy-dim:rgba(27,58,92,0.08); --navy-glow:rgba(91,141,184,0.35);
+  --sky:#5B8DB8; --sky-dim:rgba(91,141,184,0.12);
+  --green:#2E7D4F; --green-dim:#E6F4EC;
+  --red:#B3261E; --red-dim:#FDECEA;
+  --amber:#8A6D00; --amber-dim:#FDF3D7;
+  --radius:18px; --radius-sm:12px;
+  /* timed-quiz (v2 snippet) injected styles read these vars (navy values on purpose) */
+  --gold:#5B8DB8; --gold-l:#EAF2F8; --burg:#1B3A5C;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html,body{height:100%;}
+body{
+  font-family:'Tajawal',sans-serif;
+  background:
+    radial-gradient(ellipse 900px 500px at 15% -10%, rgba(91,141,184,0.20), transparent 60%),
+    radial-gradient(ellipse 900px 600px at 105% 10%, rgba(27,58,92,0.10), transparent 55%),
+    radial-gradient(ellipse 1200px 800px at 50% 120%, rgba(91,141,184,0.12), transparent 60%),
+    var(--bg-0);
+  color:var(--txt-hi);
+  min-height:100vh;
+  overflow-x:hidden;
+  padding-top:38px;
+}
+.mono{font-family:'JetBrains Mono',monospace;}
+.bg-pulse{position:fixed; inset:0; z-index:0; pointer-events:none; opacity:0.85;
+  display:flex; align-items:center; justify-content:center;}
+.bg-pulse svg{width:100%; height:100%;}
+.giant-target{transform-box:fill-box; transform-origin:center; animation:targetBreathe 7s ease-in-out infinite;}
+@keyframes targetBreathe{0%,100%{transform:scale(1);}50%{transform:scale(1.06);}}
+.target-spin{transform-box:fill-box; transform-origin:center; animation:targetSpin 22s linear infinite;}
+@keyframes targetSpin{to{transform:rotate(360deg);}}
+
+.app{position:relative; z-index:1; min-height:100vh; display:flex; flex-direction:column;}
+.wrap{max-width:760px; margin:0 auto; padding:0 20px; width:100%;}
+#tq-host{padding:0 20px;}
+
+.topbar{padding:22px 0 14px; display:flex; align-items:center; justify-content:space-between;}
+.brand{display:flex; align-items:center; gap:10px;}
+.brand-mark{width:34px; height:34px; border-radius:10px; font-size:17px;
+  background:linear-gradient(135deg, var(--navy), var(--sky));
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 0 24px var(--navy-glow); flex-shrink:0;}
+.brand-text{display:flex; flex-direction:column; line-height:1.15;}
+.brand-text b{font-size:15px; font-weight:800; letter-spacing:.2px;}
+.brand-text span{font-size:11px; color:var(--txt-lo); font-family:'JetBrains Mono',monospace; letter-spacing:.3px;}
+.pill-btn{background:var(--glass); border:1px solid var(--glass-brd); color:var(--txt-mid);
+  padding:8px 16px; border-radius:999px; font-family:'Tajawal',sans-serif; font-size:13px; font-weight:500;
+  cursor:pointer; transition:.18s;}
+.pill-btn:hover{border-color:var(--glass-brd-hover); color:var(--txt-hi); background:rgba(27,58,92,0.04);}
+.pill-btn:active{transform:scale(0.96);}
+.pill-btn:disabled{opacity:0.35; cursor:not-allowed;}
+.screen{display:none; flex:1; flex-direction:column;}
+.screen.active{display:flex;}
+
+.hero{padding:18px 0 8px;}
+.hero h1{font-size:26px; font-weight:800; line-height:1.35; margin-bottom:6px;}
+.hero h1 .accent{background:linear-gradient(90deg, var(--navy), var(--sky));
+  -webkit-background-clip:text; background-clip:text; color:transparent;}
+.hero p{color:var(--txt-mid); font-size:14px;}
+.stats-row{display:flex; gap:10px; margin:18px 0 22px;}
+.stat-chip{flex:1; background:var(--glass); border:1px solid var(--glass-brd); border-radius:var(--radius-sm);
+  padding:12px 14px;}
+.stat-chip .n{font-family:'JetBrains Mono',monospace; font-size:20px; font-weight:600;}
+.stat-chip .l{font-size:11.5px; color:var(--txt-lo); margin-top:2px;}
+.stat-chip.navy .n{color:var(--navy);}
+.stat-chip.sky .n{color:var(--sky);}
+.stat-chip.green .n{color:var(--green);}
+.section-label{display:flex; align-items:center; justify-content:space-between; margin:4px 0 12px;
+  font-size:13px; color:var(--txt-lo); font-weight:500;}
+.section-label .sel-all{color:var(--sky); cursor:pointer; font-size:12.5px; font-weight:600;
+  background:none; border:none; font-family:'Tajawal',sans-serif;}
+.topic-list{display:grid; grid-template-columns:1fr 1fr; gap:10px; padding-bottom:16px;}
+.topic-card{position:relative; background:var(--glass); border:1px solid var(--glass-brd);
+  border-radius:var(--radius-sm); padding:13px 14px; cursor:pointer; transition:.16s;
+  display:flex; flex-direction:column; gap:10px;}
+.topic-card:hover{border-color:var(--glass-brd-hover); background:rgba(27,58,92,0.03);}
+.topic-card.checked{border-color:var(--navy);
+  background:linear-gradient(90deg, rgba(27,58,92,0.07), rgba(91,141,184,0.05));}
+.topic-card-top{display:flex; align-items:center; justify-content:space-between;}
+.topic-check{width:20px; height:20px; border-radius:6px; border:2px solid var(--glass-brd-hover);
+  flex-shrink:0; display:flex; align-items:center; justify-content:center; transition:.16s;}
+.topic-card.checked .topic-check{background:linear-gradient(135deg, var(--navy), var(--sky)); border-color:transparent;}
+.topic-check svg{width:12px; height:12px; opacity:0; transition:.16s;}
+.topic-card.checked .topic-check svg{opacity:1;}
+.topic-info{min-width:0;}
+.topic-info .t-name{font-size:13px; font-weight:600; margin-bottom:3px; line-height:1.3;
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+  min-height:calc(1.3em * 2);}
+.topic-info .t-meta{font-size:10.5px; color:var(--txt-lo); font-family:'JetBrains Mono',monospace;}
+.topic-progress-ring{width:30px; height:30px; flex-shrink:0; position:relative;}
+.topic-progress-ring svg{transform:rotate(-90deg); width:100%; height:100%;}
+.topic-progress-ring .bg-ring{fill:none; stroke:rgba(27,58,92,0.10); stroke-width:3;}
+.topic-progress-ring .fg-ring{fill:none; stroke:var(--green); stroke-width:3; stroke-linecap:round; transition:stroke-dashoffset .3s;}
+.topic-progress-ring .pct{position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  font-size:9px; font-family:'JetBrains Mono',monospace; color:var(--txt-mid);}
+.floating-bar{position:fixed; bottom:0; left:0; right:0; z-index:5;
+  padding:14px 20px calc(16px + env(safe-area-inset-bottom));
+  background:linear-gradient(180deg, transparent, rgba(234,242,248,0.88) 25%, var(--bg-0) 60%);}
+.floating-bar-inner{max-width:760px; margin:0 auto; display:flex; align-items:center; gap:12px; flex-wrap:wrap;}
+.floating-bar-inner .sel-count{order:3;}
+.floating-bar-inner #btn-start{order:5;}
+.sel-count{font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--txt-mid); white-space:nowrap;}
+.btn-primary{flex:1; background:linear-gradient(90deg, var(--navy), var(--sky)); color:#fff; border:none;
+  padding:15px 20px; border-radius:999px; font-family:'Tajawal',sans-serif; font-size:15px; font-weight:700;
+  cursor:pointer; transition:.16s; box-shadow:0 8px 30px -8px var(--navy-glow);
+  display:flex; align-items:center; justify-content:center; gap:8px;}
+.btn-primary:active{transform:scale(0.98);}
+.btn-primary:disabled{opacity:0.35; cursor:not-allowed; box-shadow:none;}
+.btn-primary svg{width:16px; height:16px;}
+
+/* ---- SETTINGS ---- */
+.settings-card{background:var(--glass); border:1px solid var(--glass-brd); border-radius:var(--radius);
+  padding:22px; margin-bottom:16px;}
+.settings-card h3{font-size:14px; font-weight:700; margin-bottom:14px; color:var(--txt-hi);
+  display:flex; align-items:center; gap:8px;}
+.settings-card h3 .num{width:20px; height:20px; border-radius:6px; background:var(--glass-brd);
+  display:flex; align-items:center; justify-content:center; font-size:11px;
+  font-family:'JetBrains Mono',monospace; color:var(--txt-mid);}
+.opt-grid{display:grid; grid-template-columns:1fr 1fr; gap:8px;}
+.opt-btn{background:rgba(27,58,92,0.03); border:1px solid var(--glass-brd); border-radius:11px;
+  padding:12px 10px; text-align:center; font-size:13px; font-weight:600; color:var(--txt-mid);
+  cursor:pointer; transition:.15s; font-family:'Tajawal',sans-serif;}
+.opt-btn:hover{border-color:var(--glass-brd-hover);}
+.opt-btn.active{background:linear-gradient(135deg, rgba(27,58,92,0.12), rgba(91,141,184,0.10));
+  border-color:var(--navy); color:var(--txt-hi);}
+.queue-note{font-size:12px; color:var(--txt-lo); margin-top:12px; font-family:'JetBrains Mono',monospace;}
+.progress-summary{display:flex; align-items:center; gap:14px; margin-bottom:6px;}
+.ring-big{width:56px; height:56px; position:relative; flex-shrink:0;}
+.ring-big svg{transform:rotate(-90deg); width:100%; height:100%;}
+.ring-big .bg-ring{fill:none; stroke:rgba(27,58,92,0.10); stroke-width:5;}
+.ring-big .fg-ring{fill:none; stroke:url(#ringGrad); stroke-width:5; stroke-linecap:round; transition:stroke-dashoffset .4s;}
+.ring-big .pct{position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  font-family:'JetBrains Mono',monospace; font-weight:600; font-size:13px;}
+.progress-text b{font-size:15px; display:block;}
+.progress-text span{font-size:12.5px; color:var(--txt-lo);}
+.clear-progress{margin-right:auto; background:none; border:none; color:var(--txt-lo); font-size:12px;
+  cursor:pointer; display:flex; align-items:center; gap:5px; font-family:'Tajawal',sans-serif;}
+.clear-progress:hover{color:var(--red);}
+
+/* ---- STUDY ---- */
+.study-header{padding:16px 0 10px; display:flex; align-items:center; gap:12px;}
+.exit-btn{width:38px; height:38px; border-radius:11px; background:var(--glass); border:1px solid var(--glass-brd);
+  display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0; transition:.15s;}
+.exit-btn:hover{border-color:var(--red);}
+.exit-btn svg{width:16px; height:16px; stroke:var(--txt-mid);}
+.exit-btn:hover svg{stroke:var(--red);}
+.qbar-track{flex:1; height:7px; border-radius:99px; background:rgba(27,58,92,0.10); overflow:hidden; position:relative;}
+.qbar-fill{height:100%; border-radius:99px; background:linear-gradient(90deg, var(--navy), var(--sky)); transition:width .3s;}
+.qcounter{font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--txt-mid); white-space:nowrap; flex-shrink:0; direction:ltr;}
+.card-meta{display:flex; align-items:center; gap:8px; margin:6px 0 12px; flex-wrap:wrap;}
+.card-sec{font-size:11.5px; color:var(--txt-lo); font-family:'JetBrains Mono',monospace;}
+.ext-star{display:inline-flex; align-items:center; gap:4px; background:var(--amber-dim); color:var(--amber);
+  font-size:10.5px; font-weight:700; padding:3px 10px; border-radius:999px;}
+.known-badge{display:inline-flex; align-items:center; gap:4px; background:var(--green-dim); color:var(--green);
+  font-size:10.5px; font-weight:700; padding:3px 10px; border-radius:999px;}
+.review-badge{display:inline-flex; align-items:center; gap:4px; background:var(--sky-dim); color:var(--sky);
+  font-size:10.5px; font-weight:700; padding:3px 10px; border-radius:999px;}
+
+.flashcard{perspective:1400px; cursor:pointer; flex:1; min-height:380px; max-height:58vh;}
+.fc-inner{position:relative; width:100%; height:100%; min-height:380px; max-height:58vh;
+  transform-style:preserve-3d; transition:transform .55s cubic-bezier(.2,.7,.3,1.15);}
+.flashcard.flipped .fc-inner{transform:rotateY(180deg);}
+.fc-face{position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden;
+  background:var(--glass); border:1px solid var(--glass-brd); border-radius:var(--radius);
+  padding:26px 24px; overflow-y:auto; display:flex; flex-direction:column;}
+.fc-front{align-items:center; justify-content:center; text-align:center;}
+.fc-front .qnum{font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--navy); margin-bottom:12px; font-weight:600;}
+.fc-front .qtitle{font-size:19px; font-weight:700; line-height:1.7; direction:ltr;}
+.fc-front .tap-hint{margin-top:22px; font-size:12px; color:var(--txt-lo); display:flex; align-items:center; gap:6px; justify-content:center;}
+.fc-front .fc-src{margin-top:14px;}
+.fc-back{transform:rotateY(180deg); direction:ltr; text-align:left;}
+.fc-back .tap-hint{margin-top:16px; font-size:12px; color:var(--txt-lo); text-align:center;}
+.ans-sub{font-size:13.5px; font-weight:800; color:var(--navy); margin:14px 0 6px;}
+.ans-sub:first-child{margin-top:0;}
+.fc-back p{font-size:14px; line-height:1.65; color:var(--txt-mid); margin:6px 0;}
+.fc-back ol{margin:6px 0 6px 4px; padding-left:20px;}
+.fc-back ol li{font-size:14px; line-height:1.6; color:var(--txt-hi); margin-bottom:6px; padding-left:4px;}
+.fc-back ol li::marker{color:var(--navy); font-weight:700; font-family:'JetBrains Mono',monospace;}
+.am-opts{margin-top:10px; padding-inline-start:22px; direction:ltr; text-align:left; line-height:1.8; font-size:15px;}
+.am-opts li{margin-top:2px;}
+.mark-row{display:flex; gap:10px; padding:16px 0 calc(8px + env(safe-area-inset-bottom));}
+.mark-btn{flex:1; padding:15px; border-radius:14px; border:1.5px solid var(--glass-brd); background:var(--glass);
+  color:var(--txt-hi); font-family:'Tajawal',sans-serif; font-size:14.5px; font-weight:700; cursor:pointer;
+  display:flex; align-items:center; justify-content:center; gap:8px; transition:.15s;}
+.mark-btn:active{transform:scale(0.97);}
+.mark-btn.know{border-color:var(--green); background:var(--green-dim);}
+.mark-btn.know:hover{background:rgba(46,125,79,0.14);}
+.mark-btn.dunno{border-color:var(--red); background:var(--red-dim);}
+.mark-btn.dunno:hover{background:rgba(179,38,30,0.12);}
+.study-nav{display:flex; gap:10px; padding-bottom:calc(16px + env(safe-area-inset-bottom));}
+.nav-btn{flex:1; padding:13px; border-radius:14px; border:1px solid var(--glass-brd); background:var(--glass);
+  color:var(--txt-hi); font-family:'Tajawal',sans-serif; font-size:14px; font-weight:700; cursor:pointer;
+  display:flex; align-items:center; justify-content:center; gap:6px; transition:.15s;}
+.nav-btn:hover{border-color:var(--glass-brd-hover);}
+.nav-btn:disabled{opacity:0.3; cursor:not-allowed;}
+.nav-btn svg{width:15px; height:15px;}
+
+/* ---- QUIZ (scored) — same flip-card design as the study screen ---- */
+.fc-front.quiz-front{align-items:stretch; justify-content:flex-start; text-align:left;}
+.fc-front.quiz-front .qnum{text-align:center;}
+.fc-front.quiz-front .tap-hint{justify-content:center;}
+.fc-back.quiz-back{direction:rtl; text-align:right;}
+.q{font-size:18px; font-weight:700; line-height:1.8; direction:ltr; text-align:left;}
+.q .ar-note{font-size:14px; color:var(--txt-mid); font-weight:500; direction:rtl; text-align:right; display:block; margin-top:4px;}
+.qsrc{margin-top:10px; direction:ltr; text-align:left;}
+.opts{margin-top:14px; display:flex; flex-direction:column; gap:10px;}
+.opt{border:1.5px solid #C9D9E8; background:#fff; border-radius:12px; padding:12px 14px; font-size:16px; cursor:pointer; text-align:left; direction:ltr; font-family:inherit; line-height:1.5;}
+.opt:hover{border-color:var(--sky);}
+.opt.correct{border-color:var(--green); background:var(--green-dim);}
+.opt.wrong{border-color:var(--red); background:var(--red-dim);}
+.opt:disabled{cursor:default;}
+.tf{display:flex; gap:10px; margin-top:14px;}
+.tf .opt{flex:1; text-align:center; font-weight:800; font-size:17px;}
+.hintbtn{background:var(--pale,#EAF2F8); color:var(--navy-d); border:1px solid var(--sky); border-radius:10px; padding:8px 14px; font-size:14px; font-weight:700; cursor:pointer; font-family:inherit; margin-top:14px;}
+.hint{display:none; background:#FFFBE6; border:1px dashed var(--sky); border-radius:10px; padding:10px 14px; margin-top:10px; font-size:14px; line-height:1.8; direction:rtl; text-align:right;}
+.hint.show{display:block;}
+.explain{display:none; border-radius:10px; padding:12px 14px; margin-top:12px; font-size:14.5px; line-height:1.9;}
+.explain.show{display:block;}
+.explain.ok{background:var(--green-dim); border:1px solid var(--green);}
+.explain.no{background:var(--red-dim); border:1px solid var(--red);}
+.explain b{color:var(--navy);}
+.model{display:none; background:var(--bg-1); border:1px solid #B9CBDD; border-radius:10px; padding:12px 14px; margin-top:12px; font-size:14.5px; line-height:1.9; white-space:pre-line;}
+.model.show{display:block;}
+.badge{font-size:12px; font-weight:800; border-radius:12px; padding:3px 10px;}
+.badge.easy{background:#E6F4EC; color:var(--green);}
+.badge.med{background:#FDF3D7; color:#8A6D00;}
+.badge.hard{background:#FDECEA; color:var(--red);}
+/* source tag (on every question) */
+.srctag{display:inline-block; background:var(--pale,#EAF2F8); color:var(--navy); border:1px solid var(--sky); border-radius:999px; padding:3px 10px; font-size:12px; font-weight:700; line-height:1.5;}
+.srctag.special{background:var(--navy); color:#fff; border-color:var(--navy);}
+/* level filter */
+.levels{display:flex; gap:8px; flex-wrap:wrap; margin-top:14px;}
+.lvl{border:1.5px solid var(--sky); background:#fff; color:var(--navy); border-radius:20px; padding:7px 16px; font-size:14px; font-weight:700; cursor:pointer; font-family:inherit;}
+.lvl.on{background:var(--navy); color:#fff; border-color:var(--navy);}
+/* generic buttons (also used by the timer snippet's injected time-up card) */
+.card{background:#fff; border:1px solid #C9D9E8; border-radius:16px; padding:20px; margin-top:16px; box-shadow:0 2px 10px rgba(27,58,92,.07);}
+.btn{display:block; width:100%; background:var(--navy); color:#fff; border:none; border-radius:12px; padding:14px; font-size:17px; font-weight:800; cursor:pointer; font-family:inherit; margin-top:16px;}
+.btn:hover{background:var(--navy-d);}
+.btn.ghost{background:#fff; color:var(--navy); border:1.5px solid var(--navy); margin-top:10px;}
+.btn:disabled{opacity:.5; cursor:default;}
+.small{font-size:13px; color:var(--txt-mid); text-align:center; margin-top:10px; line-height:1.7;}
+.legend{background:var(--pale,#EAF2F8); border:1px solid #B9CBDD; border-radius:12px; padding:12px 14px; margin-top:14px; font-size:13.5px; line-height:2; color:var(--txt-hi);}
+.legend b{color:var(--navy);}
+.legend .srctag{margin:0 2px;}
+
+
+/* ---- SUMMARY / RESULTS ---- */
+.results-hero{text-align:center; padding:36px 0 18px;}
+.results-ring{width:150px; height:150px; margin:0 auto 20px; position:relative;}
+.results-ring svg{transform:rotate(-90deg); width:100%; height:100%;}
+.results-ring .bg-ring{fill:none; stroke:rgba(27,58,92,0.08); stroke-width:9;}
+.results-ring .fg-ring{fill:none; stroke:url(#ringGradBig); stroke-width:9; stroke-linecap:round;
+  transition:stroke-dashoffset 1s cubic-bezier(.2,.8,.2,1);}
+.results-ring .pct-big{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;}
+.results-ring .pct-big b{font-size:36px; font-family:'JetBrains Mono',monospace; font-weight:700;}
+.results-ring .pct-big span{font-size:11.5px; color:var(--txt-lo); margin-top:2px;}
+.results-hero h2{font-size:19px; font-weight:800; margin-bottom:6px;}
+.results-hero p{color:var(--txt-mid); font-size:13.5px;}
+.results-stats{display:flex; gap:10px; margin:20px 0;}
+.rstat{flex:1; text-align:center; background:var(--glass); border:1px solid var(--glass-brd); border-radius:14px;
+  padding:16px 10px;}
+.rstat .n{font-family:'JetBrains Mono',monospace; font-size:22px; font-weight:700;}
+.rstat .l{font-size:11.5px; color:var(--txt-lo); margin-top:3px;}
+.rstat.known .n{color:var(--green);}
+.rstat.unknown .n{color:var(--red);}
+.results-actions{display:flex; gap:10px;}
+.review-section{margin:26px 0 100px;}
+.review-section h3{font-size:14px; font-weight:700; margin-bottom:12px; display:flex; align-items:center; gap:8px;}
+.review-item{background:var(--glass); border:1px solid var(--glass-brd); border-radius:14px; padding:16px;
+  margin-bottom:10px; cursor:pointer;}
+.review-item .rq{font-size:13.5px; font-weight:600; line-height:1.55; direction:ltr; text-align:left;}
+.review-item .ra{display:none; margin-top:10px; border-top:1px solid var(--glass-brd); padding-top:10px;
+  direction:ltr; text-align:left;}
+.review-item.open .ra{display:block;}
+.review-item .ra .ans-sub{font-size:12.5px;}
+.review-item .ra p{font-size:12.5px; line-height:1.6; color:var(--txt-mid); margin:5px 0;}
+.review-item .ra ol{margin:5px 0; padding-left:18px;}
+.review-item .ra ol li{font-size:12.5px; line-height:1.55; margin-bottom:5px;}
+.review-item .ra ol li::marker{color:var(--navy); font-weight:700;}
+.empty-review{text-align:center; padding:30px 20px; color:var(--txt-lo); font-size:13.5px;}
+.footer-credit{text-align:center; padding:26px 0 calc(30px + env(safe-area-inset-bottom));
+  font-size:11.5px; color:var(--txt-lo); font-family:'JetBrains Mono',monospace;}
+.res-line{text-align:center; font-size:16px; line-height:2;}
+.res-line b{color:var(--navy);}
+table.res{width:100%; border-collapse:collapse; margin-top:12px; font-size:14px; background:#fff;}
+table.res td, table.res th{border:1px solid #C9D9E8; padding:8px; text-align:center;}
+table.res th{background:var(--navy); color:#fff;}
+footer{text-align:center; font-size:12px; color:var(--txt-mid); margin-top:26px; line-height:1.8;}
+footer b{color:var(--navy);}
+.hidden{display:none !important;}
+/* ---- fixed top strip: dua + rotating dhikr ---- */
+.top-strip{position:fixed; top:0; left:0; right:0; z-index:60;
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  padding:9px 14px;
+  background:linear-gradient(90deg, rgba(27,58,92,0.10), rgba(91,141,184,0.08));
+  border-bottom:1px solid var(--glass-brd);}
+.top-strip .dua{font-size:11px; color:var(--txt-mid); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.top-strip .dua b{color:var(--navy);}
+.dhikr{font-size:11px; font-weight:700; color:var(--amber); white-space:nowrap; transition:opacity .45s; flex-shrink:0;}
+.dhikr.fade{opacity:0;}
+/* ---- requeue time chips ---- */
+.time-row{display:flex; gap:8px; margin-top:10px; flex-wrap:wrap;}
+.time-row.disabled{opacity:0.3; pointer-events:none;}
+.time-chip{background:rgba(27,58,92,0.03); border:1px solid var(--glass-brd); border-radius:999px;
+  padding:8px 16px; font-size:12.5px; color:var(--txt-mid); cursor:pointer; transition:.15s;
+  font-family:'JetBrains Mono',monospace;}
+.time-chip.active{background:var(--sky-dim); border-color:var(--sky); color:var(--txt-hi);}
+/* ---- missed bin ---- */
+.missed-bin{display:flex; align-items:center; justify-content:space-between; gap:10px;
+  background:linear-gradient(90deg, rgba(138,109,0,0.10), rgba(179,38,30,0.06));
+  border:1px solid rgba(138,109,0,0.35); border-radius:var(--radius-sm);
+  padding:14px 16px; margin-bottom:12px;}
+.missed-bin b{font-size:13.5px; display:block;}
+.missed-bin span{font-size:11.5px; color:var(--txt-lo); font-family:'JetBrains Mono',monospace;}
+.toast{position:fixed; bottom:110px; left:50%; transform:translateX(-50%) translateY(10px); z-index:70;
+  background:rgba(27,58,92,0.95); border:1px solid var(--navy); color:#fff;
+  font-size:13px; font-weight:600; padding:10px 20px; border-radius:999px;
+  opacity:0; pointer-events:none; transition:.3s; white-space:nowrap;}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-thumb{background:rgba(27,58,92,0.20); border-radius:99px;}
+@media (max-width:400px){
+  .fc-front .qtitle{font-size:16.5px;}
+  .hero h1{font-size:22px;}
+}
+
+.brand-signature{font-family:'Great Vibes',cursive;font-size:40px;line-height:1.2;
+  text-align:center;color:#1B3A5C;padding:14px 10px 2px;position:relative;z-index:2;
+  text-shadow:0 2px 18px rgba(91,141,184,.35);}
+.brand-sub{text-align:center;font-size:11px;color:var(--txt-lo);letter-spacing:2px;
+  position:relative;z-index:2;padding-bottom:4px;}
+.watermark{position:fixed;inset:0;z-index:999;pointer-events:none;display:flex;
+  align-items:center;justify-content:center;overflow:hidden;}
+.watermark span{font-family:'Great Vibes',cursive;font-size:72px;color:rgba(27,58,92,.055);
+  transform:rotate(-28deg);white-space:nowrap;user-select:none;}
+.ans-box{border:1px solid rgba(27,58,92,.35);background:rgba(27,58,92,.05);
+  border-radius:14px;padding:16px 18px;}
+.ans-label{font-size:13px;font-weight:800;color:var(--navy);margin-bottom:10px;}
+.fc-back{overflow-y:auto;}
+@media(max-width:520px){.brand-signature{font-size:32px}.watermark span{font-size:48px}}
+/* O.Nursing — QR-only: no copying, no printing */
+body{ -webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none; }
+textarea, input{ -webkit-user-select:text; -moz-user-select:text; -ms-user-select:text; user-select:text; }
+#print-note{ display:none; }
+@media print{ body *{ display:none !important; } #print-note{ display:block !important; text-align:center; font-size:16px; font-weight:700; color:#1B3A5C; margin-top:40%; } }
+</style>
+</head>
+<body>
+
+<div class="bg-pulse">
+  <svg viewBox="0 0 400 800" preserveAspectRatio="xMidYMid slice">
+    <g class="giant-target" transform="translate(200,400)">
+      <circle r="230" fill="#1B3A5C" opacity="0.04"/>
+      <circle r="230" fill="none" stroke="#1B3A5C" stroke-width="2" opacity="0.14"/>
+      <circle r="184" fill="#5B8DB8" opacity="0.05"/>
+      <circle r="184" fill="none" stroke="#5B8DB8" stroke-width="2" opacity="0.18"/>
+      <circle r="138" fill="#1B3A5C" opacity="0.05"/>
+      <circle r="138" fill="none" stroke="#1B3A5C" stroke-width="2" opacity="0.16"/>
+      <circle r="92" fill="#5B8DB8" opacity="0.06"/>
+      <circle r="92" fill="none" stroke="#5B8DB8" stroke-width="2" opacity="0.20"/>
+      <circle r="46" fill="#1B3A5C" opacity="0.06"/>
+      <circle r="46" fill="none" stroke="#1B3A5C" stroke-width="2" opacity="0.20"/>
+      <circle r="14" fill="#1B3A5C" opacity="0.35"/>
+      <g class="target-spin">
+        <circle r="255" fill="none" stroke="#5B8DB8" stroke-width="1.5" stroke-dasharray="4 14" opacity="0.20"/>
+      </g>
+    </g>
+  </svg>
+</div>
+
+<div class="top-strip">
+  <span class="dhikr" id="dhikr">سبحان الله وبحمده</span>
+  <span class="dua">لا تنسوا الدعاء لنا ولوالدينا — <b>بالتوفيق 🤲</b></span>
+</div>
+
+<div class="watermark"><span>O.Nursing</span></div>
+
+<!-- v2 time-up card host: FIRST .wrap in the document, OUTSIDE the
+     screens, so the card stays visible when the quiz screen is hidden on expiry -->
+<div class="wrap" id="tq-host"></div>
+
+<div class="app">
+  <div class="brand-signature">O.Nursing</div>
+  <div class="brand-sub">SPECIAL NOTES • MODULE 5</div>
+
+  <!-- =============== HOME =============== -->
+  <section id="screen-home" class="screen active">
+    <div class="wrap">
+      <div id="home">
+        <div class="topbar">
+          <div class="brand">
+            <div class="brand-mark">🩺</div>
+            <div class="brand-text">
+              <b>Special Notes — Module 5</b>
+              <span>Family Planning • Maternity</span>
+            </div>
+          </div>
+          <button class="pill-btn" id="btn-reset-all">مسح كل التقدم</button>
+        </div>
+
+        <div class="hero">
+          <h1>Module 5: <span class="accent">Family Planning</span></h1>
+          <p>Special Notes — Module 5 • تمريض النسا والتوليد — اختبار موقوت (36 سؤال) + بطاقات مراجعة (73 بطاقة)</p>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-chip navy">
+            <div class="n" id="stat-total">36</div>
+            <div class="l">سؤال اختبار</div>
+          </div>
+          <div class="stat-chip sky">
+            <div class="n" id="stat-topics">73</div>
+            <div class="l">بطاقة مراجعة</div>
+          </div>
+          <div class="stat-chip green">
+            <div class="n" id="stat-known">0%</div>
+            <div class="l">بطاقات عارفها</div>
+          </div>
+        </div>
+
+        <div class="section-label">
+          <span>اختار الأقسام للبدء</span>
+          <button class="sel-all" id="btn-select-all">اختار الكل</button>
+        </div>
+
+        <div class="missed-bin" id="missed-bin">
+          <div><b>⭐ البطاقات اللي مش عارفها</b><span id="missed-count"></span></div>
+          <button class="pill-btn" id="btn-review-missed">مراجعة سريعة</button>
+        </div>
+
+        <div class="topic-list" id="topic-list"></div>
+
+        <div class="legend"><b>مصادر الأسئلة:</b> كل سؤال مكتوب عليه مصدره —
+          <span class="srctag">البنك المشترك</span> نسخة موحدة من بنوك المنصورة وطنطا وبنك 2024 وبنك طه حسني (المحلولة) •
+          <span class="srctag">بنك السس</span> مراجعة وأسئلة عبدو السس •
+          <span class="srctag">أسئلة Module V — نسا 5</span> مجموعة أسئلة Module V: Family Planning •
+          <span class="srctag">بنك إمبابة</span> •
+          <span class="srctag">امتحانات بورسعيد 2025/2026</span> •
+          <span class="srctag">مراجعة نسا تانية تمريض عام</span> •
+          <span class="srctag special">Special O.Nursing Questions</span>
+        </div>
+
+        <div class="levels" id="levels">
+          <button class="lvl on" data-lvl="all">الكل (36)</button>
+          <button class="lvl" data-lvl="easy">سهل (28)</button>
+          <button class="lvl" data-lvl="med">متوسط (6)</button>
+          <button class="lvl" data-lvl="hard">صعب (2)</button>
+        </div>
+
+        <p style="margin-top:12px; font-size:14.5px; line-height:1.9;">أسئلة شاملة كل أفكار الموديول الخامس: تنظيم الأسرة — التعريف والأهداف والفوائد، الطرق الهرمونية (الحبوب المركبة، حبوب البروجستين، الحقن، نوربلانت/إمبلانون)، اللولب، الطرق الحاجزة (الواقي الذكري ومبيدات الحيوانات المنوية)، والطرق الجراحية (ربط الأنابيب وقطع القناة المنوية) — مع <b>تلميح</b> لكل سؤال وشرح بعد الإجابة. تحت الاختبار هتلاقي <b>بطاقات المراجعة</b> (تعريفات وقوائم وإكمال ومطابقة) و<b>أسئلة Special O.Nursing Questions</b>.</p>
+        <div class="small" id="home-stats"></div>
+        <button class="btn ghost hidden" id="btn-resume">كمّل من حيث توقفت</button>
+
+        <footer>O.Nursing • Dr: Abdullah Shawky<br>الأسئلة من محتوى المحاضرة وأسئلة امتحانات دبلوم المعاهد الفنية الصحية<br><b>الأسئلة خاصة بـ O.Nursing — ممنوع النسخ والنقل</b></footer>
+        <div style="height:260px"></div>
+      </div>
+    </div>
+
+    <div class="floating-bar">
+      <div class="wrap floating-bar-inner">
+        <span class="sel-count" id="sel-count">4 أقسام محددة</span>
+        <button class="btn-primary" id="btn-start">
+          ابدأ
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============== SETTINGS =============== -->
+  <section id="screen-settings" class="screen">
+    <div class="wrap">
+      <div class="topbar">
+        <button class="pill-btn" id="btn-back-home">‹ رجوع للرئيسية</button>
+      </div>
+
+      <div class="hero" style="padding-top:6px;">
+        <h1 style="font-size:21px;">قبل ما تبدأ</h1>
+        <p id="settings-subtitle">ظبط إعدادات جلسة المذاكرة</p>
+      </div>
+
+      <div class="settings-card">
+        <div class="progress-summary">
+          <div class="ring-big">
+            <svg viewBox="0 0 56 56">
+              <circle class="bg-ring" cx="28" cy="28" r="24"/>
+              <circle class="fg-ring" id="settings-ring" cx="28" cy="28" r="24"/>
+            </svg>
+            <div class="pct" id="settings-pct">0%</div>
+          </div>
+          <div class="progress-text">
+            <b id="settings-progress-txt">0 من 0 بطاقة معروفة</b>
+            <span id="settings-progress-sub">التقدم المحفوظ لهذا الاختيار</span>
+          </div>
+          <button class="clear-progress" id="btn-clear-selection-progress">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m3 0l-1 14a2 2 0 01-2 2H7a2 2 0 01-2-2L4 6"/></svg>
+            امسح التقدم
+          </button>
+        </div>
+      </div>
+
+      <div class="settings-card">
+        <h3><span class="num">1</span> ابدأ بـ</h3>
+        <div class="opt-grid">
+          <div class="opt-btn active" data-group="scope" data-val="all">كل البطاقات</div>
+          <div class="opt-btn" data-group="scope" data-val="unknown">اللي مش عارفها بس</div>
+        </div>
+        <div class="queue-note" id="queue-note"></div>
+      </div>
+
+      <div class="settings-card">
+        <h3><span class="num">2</span> ترتيب البطاقات</h3>
+        <div class="opt-grid">
+          <div class="opt-btn active" data-group="shuffle" data-val="off">بالترتيب</div>
+          <div class="opt-btn" data-group="shuffle" data-val="on">عشوائي 🔀</div>
+        </div>
+      </div>
+
+      <div class="settings-card">
+        <h3><span class="num">3</span> إعادة عرض البطاقة الغلط</h3>
+        <div class="opt-grid">
+          <div class="opt-btn active" data-group="requeue" data-val="none">من غير إعادة</div>
+          <div class="opt-btn" data-group="requeue" data-val="time">بعد مدة معينة</div>
+          <div class="opt-btn" data-group="requeue" data-val="end" style="grid-column:1/3;">بعد ما البطاقات تخلص</div>
+        </div>
+        <div class="time-row disabled" id="requeue-time-row">
+          <div class="time-chip" data-mins="1">1 دقيقة</div>
+          <div class="time-chip active" data-mins="3">3 دقايق</div>
+          <div class="time-chip" data-mins="5">5 دقايق</div>
+          <div class="time-chip" data-mins="10">10 دقايق</div>
+        </div>
+      </div>
+
+      <div style="height:100px;"></div>
+    </div>
+
+    <div class="floating-bar">
+      <div class="wrap">
+        <button class="btn-primary" id="btn-start-study" style="width:100%;">
+          ابدأ المذاكرة 🩺
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============== STUDY (flashcards) =============== -->
+  <section id="screen-study" class="screen">
+    <div class="wrap" style="flex:1; display:flex; flex-direction:column;">
+      <div class="study-header">
+        <div class="exit-btn" id="btn-exit-study">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </div>
+        <div class="qbar-track"><div class="qbar-fill" id="qbar-fill"></div></div>
+        <div class="qcounter" id="qcounter">1 / 1</div>
+      </div>
+
+      <div class="card-meta">
+        <span class="card-sec" id="card-sec">SECTION</span>
+        <span class="ext-star hidden" id="card-ext">★ تكملة من خارج الملف</span>
+        <span class="review-badge hidden" id="card-review">🔁 مراجعة</span>
+        <span class="known-badge hidden" id="card-known">✓ عارفها</span>
+      </div>
+
+      <div class="flashcard" id="flashcard">
+        <div class="fc-inner">
+          <div class="fc-face fc-front">
+            <div class="qnum" id="fc-qnum">Q1</div>
+            <div class="qtitle" id="fc-qtitle">Question</div>
+            <div class="fc-src" id="fc-src"></div>
+            <div class="tap-hint">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4v6h6M20 20v-6h-6"/><path d="M4 10a8 8 0 0114-5M20 14a8 8 0 01-14 5"/></svg>
+              دوس على الكارت عشان تشوف الإجابة
+            </div>
+          </div>
+          <div class="fc-face fc-back" id="fc-answer"></div>
+        </div>
+      </div>
+
+      <div class="mark-row hidden" id="mark-row">
+        <button class="mark-btn dunno" id="btn-dunno">✗ لسه مش عارفها</button>
+        <button class="mark-btn know" id="btn-know">✓ عارفها</button>
+      </div>
+
+      <div class="study-nav">
+        <button class="nav-btn" id="btn-prev">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          اللي قبله
+        </button>
+        <button class="nav-btn" id="btn-shuffle" title="خلط البطاقات المتبقية">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>
+          خلط
+        </button>
+        <button class="nav-btn" id="btn-next-card">
+          اللي بعده
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============== SUMMARY (flashcards) =============== -->
+  <section id="screen-summary" class="screen">
+    <div class="wrap">
+      <div class="topbar">
+        <button class="pill-btn" id="btn-summary-exit">‹ خروج</button>
+      </div>
+
+      <div class="results-hero">
+        <div class="results-ring">
+          <svg viewBox="0 0 150 150">
+            <circle class="bg-ring" cx="75" cy="75" r="65"/>
+            <circle class="fg-ring" id="results-ring" cx="75" cy="75" r="65"/>
+          </svg>
+          <div class="pct-big">
+            <b id="results-pct">0%</b>
+            <span>نسبة البطاقات اللي عارفها</span>
+          </div>
+        </div>
+        <h2 id="results-title">خلصت الجلسة 🎉</h2>
+        <p id="results-sub">راجع البطاقات اللي لسه مش عارفها تحت</p>
+      </div>
+
+      <div class="results-stats">
+        <div class="rstat known">
+          <div class="n" id="results-known">0</div>
+          <div class="l">عارفها</div>
+        </div>
+        <div class="rstat unknown">
+          <div class="n" id="results-unknown">0</div>
+          <div class="l">مش عارفها</div>
+        </div>
+        <div class="rstat">
+          <div class="n" id="results-total">0</div>
+          <div class="l">إجمالي</div>
+        </div>
+      </div>
+
+      <div class="results-actions">
+        <button class="nav-btn" id="btn-retry-unknown">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M4 4v6h6M20 20v-6h-6"/><path d="M4 10a8 8 0 0114-5M20 14a8 8 0 01-14 5"/></svg>
+          ذاكر اللي مش عارفها
+        </button>
+        <button class="nav-btn" id="btn-go-home-2">🏠 الرئيسية</button>
+      </div>
+
+      <div class="review-section">
+        <h3>البطاقات اللي لسه مش عارفها — دوس عشان تشوف الإجابة</h3>
+        <div id="review-list"></div>
+      </div>
+
+      <div class="footer-credit">O.Nursing • Dr. Abdullah Shawky</div>
+    </div>
+  </section>
+
+  <!-- =============== QUIZ (scored MCQ + True/False, same flip-card design) =============== -->
+  <section id="quiz" class="screen">
+    <div class="wrap" style="flex:1; display:flex; flex-direction:column;">
+      <div class="study-header">
+        <div class="exit-btn" id="btn-quiz-exit">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </div>
+        <div class="qbar-track"><div class="qbar-fill" id="prog-fill"></div></div>
+        <div class="qcounter" id="q-count">1 / 36</div>
+      </div>
+
+      <div class="card-meta">
+        <span class="card-sec" id="quiz-sec">MCQ</span>
+        <span id="q-badge"></span>
+        <span class="qcounter" id="q-score">صح: 0 / 0</span>
+      </div>
+
+      <div class="flashcard quiz-card" id="quiz-card">
+        <div class="fc-inner" id="quiz-inner">
+          <div class="fc-face fc-front quiz-front">
+            <div class="qnum" id="quiz-qnum">M4</div>
+            <div class="q" id="q-stem"></div>
+            <div class="qsrc" id="q-src"></div>
+            <div id="q-body"></div>
+            <button class="hintbtn" id="btn-hint">💡 تلميح</button>
+            <div class="hint" id="q-hint"></div>
+            <div class="tap-hint">اختار إجابة — وبعدها الكارت هيتقلب ويظهر الشرح</div>
+          </div>
+          <div class="fc-face fc-back quiz-back">
+            <div class="ans-box">
+              <div class="ans-label">الشرح</div>
+              <div class="explain" id="q-explain"></div>
+              <div class="model" id="q-model"></div>
+            </div>
+            <div class="tap-hint">اضغط على الكارت للرجوع للسؤال</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="study-nav">
+        <button class="nav-btn hidden" id="btn-next">السؤال التالي ←</button>
+        <button class="nav-btn hidden" id="btn-finish">عرض النتيجة</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============== RESULTS (scored) =============== -->
+  <section id="results" class="screen">
+    <div class="wrap">
+      <div class="topbar">
+        <button class="pill-btn" id="btn-home">‹ رجوع للموديول الأول</button>
+      </div>
+
+      <div class="results-hero">
+        <div class="results-ring">
+          <svg viewBox="0 0 150 150">
+            <circle class="bg-ring" cx="75" cy="75" r="65"/>
+            <circle class="fg-ring" id="ring-fg" cx="75" cy="75" r="65" stroke-dasharray="408" stroke-dashoffset="408"/>
+          </svg>
+          <div class="pct-big">
+            <b id="res-pct">0%</b>
+            <span>النتيجة</span>
+          </div>
+        </div>
+        <h2>النتيجة</h2>
+        <div class="res-line" id="res-line"></div>
+      </div>
+
+      <table class="res" id="res-table"></table>
+
+      <div class="results-actions" style="margin-top:16px;">
+        <button class="nav-btn" id="btn-retry">إعادة الأسئلة</button>
+      </div>
+
+      <div class="footer-credit">O.Nursing • Dr. Abdullah Shawky</div>
+    </div>
+  </section>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<svg width="0" height="0" style="position:absolute;">
+  <defs>
+    <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1B3A5C"/>
+      <stop offset="100%" stop-color="#5B8DB8"/>
+    </linearGradient>
+    <linearGradient id="ringGradBig" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1B3A5C"/>
+      <stop offset="100%" stop-color="#5B8DB8"/>
+    </linearGradient>
+  </defs>
+</svg>
+<div id="print-note">الأسئلة خاصة بـ O.Nursing — ممنوع النسخ والنقل</div>
+
+<script>
+const QUESTIONS = [
+ {
+  "id": "M10",
+  "level": "easy",
+  "type": "mcq",
+  "q": "Combined oral contraceptive forms (progesterone & estrogen – progesterone only) hormones.",
+  "options": [
+   "Progesterone & estrogen",
+   "Progesterone only",
+   "Progestin only",
+   "Estrogen only"
+  ],
+  "correct": 0,
+  "hint": "What two hormones does the combined pill contain?",
+  "explain": "The combined oral contraceptive combines synthetic forms of the hormones <b>progesterone and estrogen</b>. The minipill, by contrast, contains progestin but no estrogen.",
+  "src": "أسئلة Module V — نسا 5"
+ },
+ {
+  "id": "M11",
+  "level": "easy",
+  "type": "mcq",
+  "q": "Oral contraceptive are effectively when it is taken (regular – irregular).",
+  "options": [
+   "Regularly — every day on schedule",
+   "Irregularly",
+   "Only when needed",
+   "Once a week"
+  ],
+  "correct": 0,
+  "hint": "The whole cycle must be taken on schedule to work most effectively.",
+  "explain": "Oral contraceptive pills are taken <b>every day</b>, and the whole cycle must be taken on schedule to work most effectively. The failure rate increases if the pill is not taken regularly.",
+  "src": "أسئلة Module V — نسا 5"
+ },
+ {
+  "id": "M13",
+  "level": "easy",
+  "type": "mcq",
+  "q": "Norplant consists of (six – one) tiny silicone rubber capsules.",
+  "options": [
+   "Six tiny silicone rubber capsules containing levonorgestrel",
+   "One tiny silicone rubber capsule containing levonorgestrel",
+   "One thread left for 3 years",
+   "Six tiny silicone rubber capsules containing progesterone"
+  ],
+  "correct": 0,
+  "hint": "How many capsules — and which hormone do they contain?",
+  "explain": "Norplant consists of <b>six tiny silicone rubber capsules containing the progestin levonorgestrel</b>, surgically inserted under the skin of the arm, and lasts 5 years. One thread for 3 years is Implanon.",
+  "src": "أسئلة Module V — نسا 5"
+ },
+ {
+  "id": "M17",
+  "level": "easy",
+  "type": "mcq",
+  "q": "Vasectomy is (permanent – temporary) surgical method of contraceptive.",
+  "options": [
+   "Permanent surgical method",
+   "Temporary surgical method",
+   "Permanent hormonal method",
+   "Temporary hormonal method"
+  ],
+  "correct": 0,
+  "hint": "Is vasectomy reversible or permanent?",
+  "explain": "Vasectomy is a <b>permanent surgical method</b> in which the vas deferens is cut, so sperm cannot move out of the testes. A single, quick procedure leads to lifelong, safe and very effective family planning.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "Q-SV-3",
+  "level": "med",
+  "type": "mcq",
+  "q": "A woman who has a seizure disorder and takes barbiturates and phenytoin sodium daily asks the nurse about the pill as a contraceptive choice. What is the nurse's best response?",
+  "options": [
+   "\"Oral contraceptives are a highly effective method, but they have some side effects.\"",
+   "\"Your current medications will reduce the effectiveness of the pill.\"",
+   "\"Oral contraceptives will reduce the effectiveness of your seizure medication.\"",
+   "\"The pill is a good choice for a woman of your age and with your personal history.\""
+  ],
+  "correct": 1,
+  "hint": "Anticonvulsants (barbiturates, phenytoin) reduce the effectiveness of oral contraceptives.",
+  "explain": "Because the liver metabolizes oral contraceptives, their effectiveness is <b>reduced when they are taken together with anticonvulsants</b>. The anticonvulsant reduces the effectiveness of the pill, not the other way around.",
+  "src": "Special O.Nursing Questions"
+ },
+ {
+  "id": "Q-PY-3",
+  "level": "easy",
+  "type": "mcq",
+  "q": "Which patient is a safe candidate for the use of oral contraceptives?",
+  "options": [
+   "39-year-old with a history of thrombophlebitis.",
+   "16-year-old with a benign liver tumor.",
+   "20-year-old who suspects she may be pregnant.",
+   "43-year-old who does not smoke cigarettes."
+  ],
+  "correct": 3,
+  "hint": "Who should not use OCS — and who may?",
+  "explain": "Heavy cigarette smoking is a contraindication to oral contraceptive use due to risk of stroke. Oral contraceptives are also contraindicated with a history of thrombophlebitis, with liver tumors, and in pregnancy — so the <b>43-year-old non-smoker</b> is the safe candidate.",
+  "src": "Special O.Nursing Questions"
+ },
+ {
+  "id": "Q-PY-7",
+  "level": "med",
+  "type": "mcq",
+  "q": "Which symptom in a patient using oral contraceptives should be reported to the physician immediately?",
+  "options": [
+   "5-lb weight gain",
+   "Leg pain and edema",
+   "Decrease in menstrual flow",
+   "Increased pigmentation of the face"
+  ],
+  "correct": 1,
+  "hint": "Leg pain and swelling are warning signs of a blood clot (ACHES).",
+  "explain": "Oral contraceptives increase clotting factors, which place the woman at risk for thrombophlebitis. <b>Leg pain and edema</b> are symptoms of thrombophlebitis. A 5-lb weight gain, a decrease in menstrual flow and increased facial pigmentation are expected or common findings.",
+  "src": "Special O.Nursing Questions"
+ },
+ {
+  "id": "Q-SV-5",
+  "level": "easy",
+  "type": "mcq",
+  "q": "Which client would be an ideal candidate for injectable progestins such as Depo-Provera (DMPA) as a contraceptive choice?",
+  "options": [
+   "The ideal candidate for DMPA wants menstrual regularity and predictability.",
+   "The client has a history of thrombotic problems or breast cancer.",
+   "The ideal candidate has difficulty remembering to take oral contraceptives daily.",
+   "The client is homeless or mobile and rarely receives health care."
+  ],
+  "correct": 2,
+  "hint": "DMPA is given only every 3 months — who benefits most from that?",
+  "explain": "DMPA requires only <b>four injections a year</b>, so it suits a woman who has difficulty remembering to take oral contraceptives daily. Injections must be given every 11 to 13 weeks, and access to health care is necessary.",
+  "src": "Special O.Nursing Questions"
+ },
+ {
+  "id": "Q-SV-8",
+  "level": "easy",
+  "type": "mcq",
+  "q": "An unmarried young woman describes her sex life as \"active\" and involving \"many\" partners. She wants a contraceptive method that is reliable and does not interfere with sex. She requests an intrauterine device (IUD). Which information is most important for the nurse to share?",
+  "options": [
+   "\"The IUD does not interfere with sex.\"",
+   "\"The risk of pelvic inflammatory disease will be higher with the IUD.\"",
+   "\"The IUD will protect you from sexually transmitted infections.\"",
+   "\"Pregnancy rates are high with the IUD.\""
+  ],
+  "correct": 1,
+  "hint": "The IUD offers no protection against sexually transmitted infections.",
+  "explain": "Disadvantages of IUDs include an increased risk of <b>pelvic inflammatory disease in the first 20 days after insertion</b>. The IUD offers no protection against sexually transmitted infections, and this woman with multiple partners is at higher risk of developing one.",
+  "src": "Special O.Nursing Questions"
+ },
+ {
+  "id": "Q-LC-20",
+  "level": "easy",
+  "type": "mcq",
+  "q": "Importantly, the nurse must be aware of which information related to the use of IUDs?",
+  "options": [
+   "Return to fertility can take several weeks after the device is removed.",
+   "IUDs containing copper can provide an emergency contraception option if inserted within a few days of unprotected intercourse.",
+   "IUDs offer the same protection against STIs as the diaphragm.",
+   "Consent forms are not needed for IUD insertion."
+  ],
+  "correct": 1,
+  "hint": "A copper IUD can be inserted within 5 days of unprotected intercourse.",
+  "explain": "The woman has <b>up to 5 days</b> to insert the copper IUD after unprotected sex. Return to fertility is immediate after removal of the IUD, IUDs offer no protection against STIs, and a consent form is required for insertion, as is a negative pregnancy test.",
+  "src": "Special O.Nursing Questions"
+ },
+ {
+  "id": "Q-PY-1",
+  "level": "easy",
+  "type": "mcq",
+  "q": "Which contraceptive method provides protection against sexually transmitted diseases?",
+  "options": [
+   "Oral contraceptives",
+   "Tubal ligation",
+   "Male or female condoms",
+   "Intrauterine device (IUD)"
+  ],
+  "correct": 2,
+  "hint": "Only barrier methods provide some protection from STDs.",
+  "explain": "Because latex condoms provide the best protection available, they should be used during any potential exposure to a sexually transmitted disease. <b>Only the barrier methods</b> provide some protection from STDs; tubal ligation and the IUD offer none.",
+  "src": "Special O.Nursing Questions"
+ },
+ {
+  "id": "Q-LC-18",
+  "level": "easy",
+  "type": "mcq",
+  "q": "Which contraceptive method best protects against STIs and the HIV?",
+  "options": [
+   "Periodic abstinence",
+   "Barrier methods",
+   "Hormonal methods",
+   "Same protection with all methods"
+  ],
+  "correct": 1,
+  "hint": "Barrier methods are the best protection against STIs and HIV.",
+  "explain": "<b>Barrier methods</b>, such as condoms, protect against STIs and HIV the best of all contraceptive methods. Periodic abstinence and hormonal methods, such as birth control pills, offer no protection against STIs or HIV.",
+  "src": "Special O.Nursing Questions"
+ },
+ {
+  "id": "T2",
+  "level": "easy",
+  "type": "tf",
+  "q": "Disadvantage of oral contraceptive include minor side effect as breast tenderness, headache.",
+  "correct": true,
+  "hint": "Minor side effects of OCS include breast tenderness and headache.",
+  "explain": "TRUE — the common minor side effects of combined oral contraceptives are breast tenderness, nausea, headache, vomiting, weight gain or loss, and spotting between periods.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "T3",
+  "level": "easy",
+  "type": "tf",
+  "q": "IUD is one of the effective hormonal contraceptive methods.",
+  "correct": false,
+  "hint": "The IUD is an intrauterine method, not a hormonal method.",
+  "explain": "FALSE — the IUD is an intrauterine device, listed separately from hormonal methods. Hormonal methods are oral contraceptives, the minipill, injectables and Norplant.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "T5",
+  "level": "med",
+  "type": "tf",
+  "q": "Minipill has estrogen but no progestin.",
+  "correct": false,
+  "hint": "The minipill contains progestin — and no estrogen.",
+  "explain": "FALSE — the minipill contains the same synthetic progestin as the OCS but <b>no estrogen</b>. The progestin causes thick cervical mucus impenetrable to sperm and a thin atrophic endometrium.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "T8",
+  "level": "easy",
+  "type": "tf",
+  "q": "Using of IUD will interfere with breast feeding.",
+  "correct": false,
+  "hint": "Does the IUD interfere with breastfeeding?",
+  "explain": "FALSE — the IUD does not interfere with breastfeeding. The methods that affect lactation are the combined pill, which may decrease the quantity of breast milk, and the minipill, which does not affect lactation.",
+  "src": "بنك السس"
+ },
+ {
+  "id": "T9",
+  "level": "med",
+  "type": "tf",
+  "q": "Family planning means avoidance of unwanted births only.",
+  "correct": false,
+  "hint": "Family planning has 7 objectives — avoidance of unwanted births is only one of them.",
+  "explain": "FALSE — avoidance of unwanted births is only one of the 7 objectives of family planning, which also include bringing about wanted births, regulating the interval between pregnancies, and determining the number of children in the family.",
+  "src": "بنك السس"
+ },
+ {
+  "id": "T12",
+  "level": "easy",
+  "type": "tf",
+  "q": "Male sterilization is more commonly known as a vasectomy.",
+  "correct": true,
+  "hint": "What is male sterilization called?",
+  "explain": "TRUE — male sterilization is vasectomy, a permanent surgical method in which the vas deferens is cut.",
+  "src": "بنك السس"
+ },
+ {
+  "id": "T13",
+  "level": "easy",
+  "type": "tf",
+  "q": "Hormonal methods of contraception protect against sexually transmitted diseases (STDs).",
+  "correct": false,
+  "hint": "Which methods protect against STDs?",
+  "explain": "FALSE — hormonal methods offer no protection against STDs. The methods that protect against STDs are the barrier methods: the condom and spermicidal products.",
+  "src": "بنك السس"
+ },
+ {
+  "id": "T14",
+  "level": "easy",
+  "type": "tf",
+  "q": "Combined oral contraceptive may decrease quantity of breast milk.",
+  "correct": true,
+  "hint": "COC may decrease breast milk; the minipill does not affect lactation.",
+  "explain": "TRUE — combined oral contraceptives may decrease the quantity of breast milk, while the minipill does not affect lactation. (T25 is the same stem — it is never used.)",
+  "src": "بنك السس"
+ },
+ {
+  "id": "T15",
+  "level": "med",
+  "type": "tf",
+  "q": "Minipills contains estrogen hormone only.",
+  "correct": false,
+  "hint": "What does the minipill contain — estrogen or progestin?",
+  "explain": "FALSE — minipills contain <b>progestin only</b>, with no estrogen. They contain the same synthetic progestin as the OCS but no estrogen.",
+  "src": "بنك السس"
+ },
+ {
+  "id": "T16",
+  "level": "easy",
+  "type": "tf",
+  "q": "Spermicidal products must be used from 1-20 minutes before each intercourse.",
+  "correct": false,
+  "hint": "Spermicides are used from 5–10 minutes before each act.",
+  "explain": "FALSE — spermicidal products are used from <b>5–10 minutes</b> before each act of intercourse, not 1–20 minutes.",
+  "src": "بنك السس"
+ },
+ {
+  "id": "T17",
+  "level": "med",
+  "type": "tf",
+  "q": "Minipills don't affect lactation.",
+  "correct": true,
+  "hint": "The minipill does not affect lactation — unlike the combined pill.",
+  "explain": "TRUE — the minipill does not affect lactation (book, p. 95; the combined stem T6 is keyed True). Note: the printed key cell for this stem was left blank in the bank — the True key is derived from the book and from the combined stem.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "T18",
+  "level": "easy",
+  "type": "tf",
+  "q": "Tubal ligation is reversible family planning method.",
+  "correct": false,
+  "hint": "Tubal ligation is a permanent method.",
+  "explain": "FALSE — tubal ligation is a <b>permanent</b> method of contraception in which the fallopian tubes are closed so the ovum cannot travel through them to meet the sperm.",
+  "src": "بنك السس"
+ },
+ {
+  "id": "T20",
+  "level": "hard",
+  "type": "tf",
+  "q": "From the contraindications of IUD use is history of ectopic pregnancy.",
+  "correct": true,
+  "hint": "Who should not use the IUD? A history of tubal pregnancy is one group.",
+  "explain": "TRUE — women with a history of tubal (ectopic) pregnancy are among the 5 groups who should not use the IUD, along with pelvic inflammatory disease or STDs, very heavy menstruation or abnormal vaginal bleeding with anemia, possible pregnancy, and cervical or uterine cancer.",
+  "src": "بنك السس"
+ },
+ {
+  "id": "T23",
+  "level": "easy",
+  "type": "tf",
+  "q": "Vasectomy increase sexual enjoyment.",
+  "correct": true,
+  "hint": "One advantage of vasectomy is increased sexual enjoyment.",
+  "explain": "TRUE — increased sexual enjoyment because there is no need to worry about pregnancy is one of the 7 advantages of vasectomy.",
+  "src": "مراجعة نسا تانية تمريض عام"
+ },
+ {
+  "id": "T24",
+  "level": "hard",
+  "type": "tf",
+  "q": "Minipill reduce ovarian cyst, breast cyst.",
+  "correct": false,
+  "hint": "Ovarian-cyst and benign-breast-cyst protection belongs to OCS, not the minipill.",
+  "explain": "FALSE — protection against ovarian cysts and benign breast cysts is an advantage of <b>combined oral contraceptives</b>, not of the minipill. The minipill's disadvantages are a higher pregnancy rate, menstrual irregularity and spotting, and a high rate of ectopic pregnancy.",
+  "src": "مراجعة نسا تانية تمريض عام"
+ },
+ {
+  "id": "T26",
+  "level": "easy",
+  "type": "tf",
+  "q": "Minipill decrease quantity of breast milk.",
+  "correct": false,
+  "hint": "The minipill does not affect lactation.",
+  "explain": "FALSE — the minipill does not affect lactation. It is the combined oral contraceptive that may decrease the quantity of breast milk.",
+  "src": "مراجعة نسا تانية تمريض عام"
+ },
+ {
+  "id": "T27",
+  "level": "easy",
+  "type": "tf",
+  "q": "Injectable contraceptive inject into vein.",
+  "correct": false,
+  "hint": "Injectables are injected into muscle.",
+  "explain": "FALSE — injectable contraceptives are synthetic progestin hormones injected <b>into muscle</b>, from which they are slowly released — not into a vein.",
+  "src": "مراجعة نسا تانية تمريض عام"
+ },
+ {
+  "id": "T28",
+  "level": "easy",
+  "type": "tf",
+  "q": "OCS decrease man's ability to sex.",
+  "correct": false,
+  "hint": "Vasectomy does not affect a man's ability to have sex.",
+  "explain": "FALSE — oral contraceptives do not decrease a man's ability to have sex. The book states that vasectomy does not affect a man's ability to have sex.",
+  "src": "مراجعة نسا تانية تمريض عام"
+ },
+ {
+  "id": "T29",
+  "level": "easy",
+  "type": "tf",
+  "q": "OCS are taken every 21 day or 28 day.",
+  "correct": true,
+  "hint": "Pills are taken every day in 21-day or 28-day cycles.",
+  "explain": "TRUE — oral contraceptive pills are taken every day in <b>21-day cycles or 28-day cycles</b>.",
+  "src": "مراجعة نسا تانية تمريض عام"
+ },
+ {
+  "id": "T30",
+  "level": "easy",
+  "type": "tf",
+  "q": "Norplant is six silicon rubber capsules inserted surgical under skin of arm.",
+  "correct": true,
+  "hint": "Norplant: six capsules, under the skin of the arm, 5 years.",
+  "explain": "TRUE — Norplant consists of six tiny silicone rubber capsules containing levonorgestrel, surgically inserted under the skin of the arm, and removed after 5 years.",
+  "src": "مراجعة نسا تانية تمريض عام"
+ },
+ {
+  "id": "Q-AT-21",
+  "level": "easy",
+  "type": "tf",
+  "q": "Chest pain, shortness of breath, leg pain, headache and eye problems are warning signs of hormonal birth control use.",
+  "correct": true,
+  "hint": "ACHES warning signs: abdominal pain, chest pain, headaches, eye problems, severe leg pain.",
+  "explain": "TRUE — chest pain, shortness of breath, leg pain, headache and eye problems are warning signs of hormonal birth control use. (Derived from a Q&A item — no options in source.)",
+  "src": "Special O.Nursing Questions"
+ },
+ {
+  "id": "Q-AT-22",
+  "level": "easy",
+  "type": "tf",
+  "q": "A history of blood clots is a contraindication to hormonal oral contraceptives.",
+  "correct": true,
+  "hint": "Who should not use OCS? Women with blood clots, stroke, heart disease or cancer.",
+  "explain": "TRUE — a history of blood clots is a contraindication to hormonal oral contraceptives, along with a history of stroke, cardiac problems, breast or estrogen-related cancers, smoking and hypertension. (Derived from a Q&A item — no options in source.)",
+  "src": "Special O.Nursing Questions"
+ },
+ {
+  "id": "Q-AT-25",
+  "level": "easy",
+  "type": "tf",
+  "q": "IUDs can increase the risk of pelvic inflammatory disease, ectopic pregnancy and uterine perforation.",
+  "correct": true,
+  "hint": "IUD risks include pelvic inflammatory disease, ectopic pregnancy and uterine perforation.",
+  "explain": "TRUE — IUDs can increase the risk of pelvic inflammatory disease, ectopic pregnancy and uterine perforation. Warning signs include a change in string length, foul-smelling discharge, pain with intercourse, fever and chills. (Derived from a Q&A item — no options in source.)",
+  "src": "Special O.Nursing Questions"
+ },
+ {
+  "id": "Q-L11-1",
+  "level": "easy",
+  "type": "tf",
+  "q": "An intrauterine device prevents pregnancy by producing a spermicidal intrauterine environment.",
+  "correct": true,
+  "hint": "The IUD induces an environment in the uterus inhospitable to egg and sperm.",
+  "explain": "TRUE — an intrauterine device prevents pregnancy by producing a spermicidal intrauterine environment. (Derived from a Q&A item — no options in source.)",
+  "src": "Special O.Nursing Questions"
+ },
+ {
+  "id": "D2",
+  "level": "easy",
+  "type": "written",
+  "q": "Define: Vasectomy.",
+  "model": "A permanent surgical method in which the vas deferens which carries a man's sperm from the scrotum to the urethra during ejaculation is cut. This operation keeps sperm from mixing into the semen when men ejaculate; after a vasectomy, sperm cannot move out of the testes.",
+  "hint": "A permanent surgical method — what is cut?",
+  "explain": "Vasectomy is a permanent surgical method in which the vas deferens is cut.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "D4",
+  "level": "easy",
+  "type": "written",
+  "q": "Define: Intrauterine device (IUD).",
+  "model": "A small plastic or metal device that is placed in the uterus through the cervical canal. How the IUD prevents pregnancy is not completely understood; it seems to induce an environment in the uterus which makes it inhospitable to both egg and sperm.",
+  "hint": "A small plastic or metal device — placed where?",
+  "explain": "The IUD is a small plastic or metal device placed in the uterus through the cervical canal.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "D5",
+  "level": "easy",
+  "type": "written",
+  "q": "Define: Oral contraceptives.",
+  "model": "It combines synthetic forms of the hormones progesterone and estrogen.",
+  "hint": "Which two hormones?",
+  "explain": "Oral contraceptives combine synthetic forms of the hormones progesterone and estrogen.",
+  "src": "بنك السس"
+ },
+ {
+  "id": "D6",
+  "level": "easy",
+  "type": "written",
+  "q": "Define: Injectable contraceptives.",
+  "model": "Synthetic progesterone hormone injected into the muscle.",
+  "hint": "Which hormone — and into where?",
+  "explain": "Injectable contraceptives are synthetic progesterone hormone injected into the muscle.",
+  "src": "بنك السس"
+ },
+ {
+  "id": "D8",
+  "level": "easy",
+  "type": "written",
+  "q": "Define: Condom.",
+  "model": "A sheath of thin rubber placed on a man's penis before sexual intercourse, to collect the semen, keeping the sperm from entering the woman's vagina. A new condom must be used for each act of intercourse.",
+  "hint": "A sheath of thin rubber — what does it collect?",
+  "explain": "A condom is a sheath of thin rubber placed on a man's penis before sexual intercourse.",
+  "src": "بنك السس"
+ },
+ {
+  "id": "D10",
+  "level": "easy",
+  "type": "written",
+  "q": "Define: Objectives of family planning.",
+  "model": "The 7 WHO objectives:\n1) Avoidance of unwanted births.\n2) Bringing about wanted births.\n3) Regulation of the interval between pregnancies.\n4) Control the time at which births occur in relation to parents' age.\n5) Determine the number of children in the family.\n6) Avoid pregnancy for women with serious diseases.\n7) Avoid pregnancy for women with genetic diseases.",
+  "hint": "How many objectives — and which ones?",
+  "explain": "Family planning has 7 WHO objectives, from avoidance of unwanted births to avoiding pregnancy for women with serious or genetic diseases.",
+  "src": "أسئلة Module V — نسا 5"
+ },
+ {
+  "id": "D11",
+  "level": "easy",
+  "type": "written",
+  "q": "Define: Benefits of family planning (women / children / family / community).",
+  "model": "Women (5): decrease maternal mortality and morbidity by reducing high-risk pregnancies; improve health and the quality of life; avoidance of hazards and complications of high parity; supporting women's rights and opportunities for education, employment, and full participation in society; enjoyment of marital life.\nChildren (6): decrease child mortality; improve intellectual development; prevent genetic diseases and improve genetic potentials; prevent communicable diseases; improve the nutritional status and prevent nutritional diseases; provide better opportunities for education, recreation and interaction with other family members.\nFamily (4): improves the financial status; improves the educational opportunities for children; improves work opportunities especially women; improves nutrition and quality of life.\nCommunity (4): less drain on resources; high levels of socioeconomic development; fighting HIV/AIDS through providing information; protecting the environment by stabilizing population growth.",
+  "hint": "Benefits for women (5), children (6), family (4) and community (4).",
+  "explain": "Family planning benefits women, children, the family and the community — 5 + 6 + 4 + 4 items.",
+  "src": "أسئلة Module V — نسا 5"
+ },
+ {
+  "id": "D12",
+  "level": "easy",
+  "type": "written",
+  "q": "Define: Family planning methods (one of them).",
+  "model": "Any one method with its definition — e.g. Hormonal methods: oral contraceptive (OCS, pills, combined oral contraceptive), progestin-only pill (minipill), injectable contraceptives, Norplant. Intrauterine method: IUD (CU.T, Lippes loop) — a small plastic or metal device placed in the uterus through the cervical canal. Barrier methods: condom — a sheath of thin rubber (latex) put on a man's erect penis before intercourse; spermicidal products — foams, creams, jellies, tablets and suppositories. Surgical methods: tubal ligation (female sterilization) — a permanent method in which the fallopian tubes are closed; vasectomy (male sterilization) — a permanent surgical method in which the vas deferens is cut.",
+  "hint": "Hormonal / intrauterine / barrier / surgical — pick one and define it.",
+  "explain": "Family planning methods are classified into hormonal, intrauterine, barrier and surgical methods.",
+  "src": "أسئلة Module V — نسا 5"
+ },
+ {
+  "id": "L1",
+  "level": "easy",
+  "type": "written",
+  "q": "List: Advantages of oral contraceptive methods.",
+  "model": "1) Highly effective when used properly, easily used.\n2) Reduce menstrual cramping and menstrual blood loss, reduce iron deficiency anemia.\n3) Reduce risk of \"same pelvic infection\" (as printed) and ectopic pregnancy.\n4) Reduce risk of ovarian and uterine cancer, protects against ovarian cysts and benign breast cysts.",
+  "hint": "Four advantages — effectiveness, menstrual, infection, cancer.",
+  "explain": "The advantages of oral contraceptives are effectiveness, less menstrual cramping and blood loss, less pelvic infection and ectopic pregnancy, and less ovarian and uterine cancer.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "L2",
+  "level": "easy",
+  "type": "written",
+  "q": "List: Disadvantages of IUD.",
+  "model": "1) Insertion and removal and follow up require trained health personnel with appropriate equipment and facilities.\n2) Insertion sometimes is painful.\n3) May cause irregular or heavy bleeding and anemia.\n4) Occasionally severe abdominal cramping.",
+  "hint": "Four disadvantages — trained personnel, pain, bleeding, cramping.",
+  "explain": "The disadvantages of the IUD are the need for trained personnel, painful insertion, irregular or heavy bleeding with anemia, and severe abdominal cramping.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "L3",
+  "level": "easy",
+  "type": "written",
+  "q": "List: Contraindications of vasectomy.",
+  "model": "1) Diabetic patient.\n2) Anemic patient.\n3) Skin infection.",
+  "hint": "Three contraindications.",
+  "explain": "Vasectomy is contraindicated in a diabetic patient, an anemic patient, and with skin infection.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "L4",
+  "level": "easy",
+  "type": "written",
+  "q": "List: Who should not use the injectable contraceptive.",
+  "model": "1) If pregnancy is suspected or if undiagnosed genital bleeding is present.\n2) If there is a history of malignancy or cardiovascular disease.",
+  "hint": "Two groups — pregnancy/bleeding, and malignancy/heart disease.",
+  "explain": "Injectables should not be used if pregnancy is suspected or undiagnosed genital bleeding is present, or with a history of malignancy or cardiovascular disease.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "L5",
+  "level": "easy",
+  "type": "written",
+  "q": "List: Advantage of IUD.",
+  "model": "1) Highly effective, long term, easy to use, no re-supply problems, reversible, inexpensive.\n2) Very safe if side effects receive proper care.",
+  "hint": "Highly effective and long term — and very safe if side effects are cared for.",
+  "explain": "The IUD is highly effective, long term, easy to use, reversible and inexpensive, and very safe if side effects receive proper care.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "L8",
+  "level": "easy",
+  "type": "written",
+  "q": "List: Advantages of condom.",
+  "model": "1) Easy to use, effective, inexpensive, easily obtained.\n2) Protect against sexually transmitted disease including AIDS.",
+  "hint": "Two advantages — easy and cheap, and STD protection.",
+  "explain": "Condoms are easy to use, effective, inexpensive and easily obtained, and protect against sexually transmitted disease including AIDS.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "L11",
+  "level": "easy",
+  "type": "written",
+  "q": "List: Spermicidal products in family planning methods include …",
+  "model": "Foams, creams, jellies, tablets and suppositories.",
+  "hint": "Five forms.",
+  "explain": "Spermicidal products are foams, creams, jellies, tablets and suppositories.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "L12",
+  "level": "easy",
+  "type": "written",
+  "q": "List: Oral contraceptive, progestin only pill, injectable contraceptive in family planning are called …",
+  "model": "Hormonal methods.",
+  "hint": "One group name for all three.",
+  "explain": "Oral contraceptives, the progestin-only pill and injectable contraceptives are called hormonal methods.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "L13",
+  "level": "easy",
+  "type": "written",
+  "q": "List: Benefits of family planning for children.",
+  "model": "1) Decrease child mortality.\n2) Improve intellectual development.\n3) Prevent genetic diseases and improve genetic potentials.\n4) Prevent communicable diseases.\n5) Improve the nutritional status and prevent nutritional diseases.\n6) Provide better opportunities for education, recreation and interaction with other family members.",
+  "hint": "Six benefits for children.",
+  "explain": "Family planning benefits children in mortality, intellect, genetics, communicable diseases, nutrition and education.",
+  "src": "بنك إمبابة"
+ },
+ {
+  "id": "L14",
+  "level": "easy",
+  "type": "written",
+  "q": "List: Benefits of family planning for the family.",
+  "model": "1) Improves the financial status.\n2) Improves the educational opportunities for children.\n3) Improves work opportunities especially women.\n4) Improves nutrition and quality of life.",
+  "hint": "Four benefits for the family.",
+  "explain": "Family planning improves the family's finances, children's education, women's work opportunities, and nutrition and quality of life.",
+  "src": "مراجعة نسا تانية تمريض عام"
+ },
+ {
+  "id": "L15",
+  "level": "easy",
+  "type": "written",
+  "q": "List: Benefits of family planning for the community.",
+  "model": "1) Less drain on resources.\n2) High levels of socioeconomic development.\n3) Fighting HIV/AIDS through providing information.\n4) Protecting the environment by stabilizing population growth.",
+  "hint": "Four benefits for the community.",
+  "explain": "Family planning benefits the community in resources, development, HIV/AIDS information and population growth.",
+  "src": "مراجعة نسا تانية تمريض عام"
+ },
+ {
+  "id": "L16",
+  "level": "easy",
+  "type": "written",
+  "q": "List: Disadvantage of progestin-only pill.",
+  "model": "1) Higher pregnancy rate than combined OCS.\n2) More likely to cause menstrual irregularity and vaginal spotting.\n3) High rate of ectopic pregnancy.",
+  "hint": "Three disadvantages of the minipill.",
+  "explain": "The minipill has a higher pregnancy rate than combined OCS, more menstrual irregularity and spotting, and a high rate of ectopic pregnancy.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "L17",
+  "level": "easy",
+  "type": "written",
+  "q": "List: Warning signs of tubal ligation.",
+  "model": "Bleeding, shock, infection and bowel injury, fever, weakness, rapid pulse, persistent abdominal pain, vomiting, pus and tenderness at the surgical site.",
+  "hint": "The book's full list — 10 warning signs.",
+  "explain": "Warning signs of tubal ligation are bleeding, shock, infection and bowel injury, fever, weakness, rapid pulse, persistent abdominal pain, vomiting, and pus and tenderness at the surgical site.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "L19",
+  "level": "easy",
+  "type": "written",
+  "q": "List: Side effects of IUD.",
+  "model": "1) Uterine bleeding.\n2) Painful uterine cramps.\n3) Risk of pelvic infection.",
+  "hint": "Three side effects — bleeding, cramps, infection.",
+  "explain": "The side effects of the IUD are uterine bleeding, painful uterine cramps and risk of pelvic infection.",
+  "src": "امتحانات بورسعيد 2025/2026"
+ },
+ {
+  "id": "L20",
+  "level": "easy",
+  "type": "written",
+  "q": "List: Family planning methods (classification with examples).",
+  "model": "1) Hormonal: OCS, minipill, injectable, Norplant.\n2) Intrauterine: IUD.\n3) Barrier: condom, spermicidal products.\n4) Surgical: tubal ligation, vasectomy.",
+  "hint": "Four groups with examples.",
+  "explain": "Family planning methods are hormonal, intrauterine, barrier and surgical.",
+  "src": "مراجعة نسا تانية تمريض عام"
+ },
+ {
+  "id": "L22",
+  "level": "easy",
+  "type": "written",
+  "q": "List: Hormonal methods for family planning include … & …",
+  "model": "Any 2 of the 4 hormonal methods: oral contraceptive (OCS), progestin-only pill (minipill), injectable contraceptives, Norplant.",
+  "hint": "Any two of the four hormonal methods.",
+  "explain": "Hormonal methods are oral contraceptives, the minipill, injectable contraceptives and Norplant.",
+  "src": "بنك إمبابة"
+ },
+ {
+  "id": "C1",
+  "level": "easy",
+  "type": "written",
+  "q": "Complete: Oral contraceptive pills are taken every day in … or … day cycles.",
+  "model": "21 or 28 days.",
+  "hint": "21 or 28?",
+  "explain": "Oral contraceptive pills are taken every day in 21-day or 28-day cycles.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "C2",
+  "level": "easy",
+  "type": "written",
+  "q": "Complete: In oral contraceptive, combined oral contraceptive form hormones … & … but minipill has … but no …",
+  "model": "Progesterone & estrogen; progestin; estrogen.",
+  "hint": "Combined = two hormones; minipill = one, and no estrogen.",
+  "explain": "The combined pill forms progesterone and estrogen hormones; the minipill has progestin but no estrogen.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "C3",
+  "level": "easy",
+  "type": "written",
+  "q": "Complete: In oral contraceptive, combined oral contraceptive … on lactation but minipill … on lactation.",
+  "model": "Decrease / affect — the combined pill may decrease the quantity of breast milk, while the minipill does not affect lactation. (Flag: the bank's English answer word for the combined pill is hidden in the source; the book says COC \"may decrease quantity of breast milk\".)",
+  "hint": "Combined pill vs minipill — opposite effects on lactation.",
+  "explain": "The combined oral contraceptive may decrease the quantity of breast milk, but the minipill does not affect lactation.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "C4",
+  "level": "easy",
+  "type": "written",
+  "q": "Complete: Warning signs of oral contraceptive are: …, …, …, … & …",
+  "model": "Swelling or pain in the legs; yellowing of skin or eyes; pain in the abdomen, chest or arms; shortness of breath, severe headache or depression; eye problems such as blurred or double vision. (The book's 5 warning signs — the bank underlines only 4.)",
+  "hint": "Five warning signs — legs, skin, pain, breathing, eyes.",
+  "explain": "The 5 warning signs of oral contraceptives are swelling or pain in the legs, yellowing of skin or eyes, pain in the abdomen, chest or arms, shortness of breath with severe headache or depression, and eye problems.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "C5",
+  "level": "easy",
+  "type": "written",
+  "q": "Complete: Disadvantage of injectable contraceptives is delay of fertility … months after the last dose.",
+  "model": "4–8 months.",
+  "hint": "How many months is fertility delayed?",
+  "explain": "Injectable contraceptives delay fertility 4–8 months after the last dose.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "C6",
+  "level": "easy",
+  "type": "written",
+  "q": "Complete: Norplant contraceptive consists of … capsules, containing …, it is surgically inserted …, it can be used for … years.",
+  "model": "Six capsules; levonorgestrel; under the skin of the arm; 5 years.",
+  "hint": "Six capsules, one hormone, under the arm, 5 years.",
+  "explain": "Norplant consists of six tiny silicone rubber capsules containing levonorgestrel, surgically inserted under the skin of the arm, and can be used for 5 years.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "C7",
+  "level": "easy",
+  "type": "written",
+  "q": "Complete: Intrauterine device types as …, … & …, it is made of … or …",
+  "model": "IUD, CU.T and Lippes loop; a small plastic or metal device.",
+  "hint": "Three types — and what is it made of?",
+  "explain": "IUD types are IUD, CU.T and Lippes loop; it is made of a small plastic or metal device.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "C8",
+  "level": "easy",
+  "type": "written",
+  "q": "Complete: Condom is made of … used before …",
+  "model": "A sheath of thin rubber (latex); each act of intercourse.",
+  "hint": "Thin rubber — before each act.",
+  "explain": "A condom is made of a sheath of thin rubber (latex), used before each act of intercourse.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "C9",
+  "level": "easy",
+  "type": "written",
+  "q": "Complete: Spermicidal products must be used before each intercourse about … minutes.",
+  "model": "5–10 minutes.",
+  "hint": "5–10 minutes before each act.",
+  "explain": "Spermicidal products must be used from 5–10 minutes before each act of intercourse.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "C10",
+  "level": "easy",
+  "type": "written",
+  "q": "Complete: Tubes are surgically closed with …, …, … & …",
+  "model": "Bands, clips, electro-cautery, cutting and tying.",
+  "hint": "Four ways to close the tubes.",
+  "explain": "In tubal ligation the tubes are surgically closed with bands, clips, electro-cautery or by cutting and tying.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "C11",
+  "level": "easy",
+  "type": "written",
+  "q": "Complete: Warning signs of tubal ligation are …, …, …, … & …",
+  "model": "Bleeding, shock, infection and bowel injury, fever, weakness, rapid pulse, persistent abdominal pain, vomiting, pus and tenderness at the surgical site. (The book's full list — 10 items for 5 blanks.)",
+  "hint": "The book's full list of warning signs.",
+  "explain": "Warning signs of tubal ligation are bleeding, shock, infection and bowel injury, fever, weakness, rapid pulse, persistent abdominal pain, vomiting, and pus and tenderness at the surgical site.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "C12",
+  "level": "easy",
+  "type": "written",
+  "q": "Complete: Complications of vasectomy surgery are … & …",
+  "model": "Bleeding, hematoma, local infection. (The book lists all 3 for 2 blanks.)",
+  "hint": "Three complications.",
+  "explain": "Complications of vasectomy surgery are bleeding, hematoma and local infection.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "C13",
+  "level": "easy",
+  "type": "written",
+  "q": "Complete: After vasectomy, the husband uses a condom at least … months.",
+  "model": "3 months.",
+  "hint": "At least how many months?",
+  "explain": "After vasectomy, the husband uses a condom for at least the first 20 ejaculations or the first 3 months.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "C14",
+  "level": "easy",
+  "type": "written",
+  "q": "Complete: Action of oral contraceptive …, …, … & …",
+  "model": "Stop ovulation; thick cervical mucus impenetrable to sperm; induce endometrial changes. (The book lists 3 actions.)",
+  "hint": "Three actions — ovulation, mucus, endometrium.",
+  "explain": "Oral contraceptives stop ovulation, make cervical mucus thick and impenetrable to sperm, and induce endometrial changes.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "C15",
+  "level": "easy",
+  "type": "written",
+  "q": "Complete: The oral contraceptive pills work as …, … and …",
+  "model": "Stop ovulation; thick cervical mucus impenetrable to sperm; induce endometrial changes.",
+  "hint": "Three actions — ovulation, mucus, endometrium.",
+  "explain": "Oral contraceptive pills stop ovulation, make cervical mucus thick and impenetrable to sperm, and induce endometrial changes.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "C16",
+  "level": "easy",
+  "type": "written",
+  "q": "Complete: From common side effects of combined oral contraceptive pills are …, …, …, … and …",
+  "model": "Breast tenderness, nausea, headache, vomiting, weight gain or loss, spotting between periods. (The book lists all 6 for 5 blanks.)",
+  "hint": "Six minor side effects.",
+  "explain": "The common minor side effects of combined oral contraceptives are breast tenderness, nausea, headache, vomiting, weight gain or loss, and spotting between periods.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "C17",
+  "level": "easy",
+  "type": "written",
+  "q": "Complete: The Norplant consists of … tiny silicone rubber capsules containing the progestin, while Implanon consists of … thread and could be left for … years.",
+  "model": "Six capsules; one thread; 3 years.",
+  "hint": "Norplant six — Implanon one thread, 3 years.",
+  "explain": "Norplant consists of six tiny silicone rubber capsules, while Implanon consists of only one thread and could be left for 3 years.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "C18",
+  "level": "easy",
+  "type": "written",
+  "q": "Complete: … very safe family planning method if side effects receive proper care.",
+  "model": "IUD.",
+  "hint": "Which method is very safe if side effects receive proper care?",
+  "explain": "The IUD is a very safe family planning method if side effects receive proper care.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "C19",
+  "level": "easy",
+  "type": "written",
+  "q": "Complete: Foams, creams, jellies, tablets and suppositories in family planning are called …",
+  "model": "Spermicidal products.",
+  "hint": "One group name for foams, creams, jellies, tablets and suppositories.",
+  "explain": "Foams, creams, jellies, tablets and suppositories are called spermicidal products.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "C20",
+  "level": "easy",
+  "type": "written",
+  "q": "Complete: … is a permanent method of contraception in which the fallopian tubes are closed with bands, clips or by cutting and tying.",
+  "model": "Tubal ligation.",
+  "hint": "Which permanent method closes the fallopian tubes?",
+  "explain": "Tubal ligation is a permanent method of contraception in which the fallopian tubes are closed with bands, clips or by cutting and tying.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "C21",
+  "level": "easy",
+  "type": "written",
+  "q": "Complete: … is a family planning method placed in the uterus through cervical canal.",
+  "model": "IUD / intrauterine device.",
+  "hint": "Placed in the uterus through the cervical canal.",
+  "explain": "The IUD is a family planning method placed in the uterus through the cervical canal.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "C22",
+  "level": "easy",
+  "type": "written",
+  "q": "Complete: Injectable contraceptive has … hormones, route of administration is … and given every … month.",
+  "model": "Progestin; into muscle; every 3 months.",
+  "hint": "Progestin, into muscle, every 3 months.",
+  "explain": "The injectable contraceptive has progestin hormones, its route of administration is into muscle, and it is given every 3 months.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "C23",
+  "level": "easy",
+  "type": "written",
+  "q": "Complete: Who should not use the injectable contraceptive: …",
+  "model": "If pregnancy is suspected or if undiagnosed genital bleeding is present; if there is a history of malignancy or cardiovascular disease.",
+  "hint": "Two groups.",
+  "explain": "Injectables should not be used if pregnancy is suspected or undiagnosed genital bleeding is present, or with a history of malignancy or cardiovascular disease.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "C24",
+  "level": "easy",
+  "type": "written",
+  "q": "Complete: Advantages of oral contraceptive methods: …",
+  "model": "Highly effective when used properly, easily used; reduce menstrual cramping and menstrual blood loss, reduce iron deficiency anemia; reduce risk of pelvic infection and ectopic pregnancy; reduce risk of ovarian and uterine cancer, protects against ovarian cysts and benign breast cysts.",
+  "hint": "Four advantages.",
+  "explain": "The advantages of oral contraceptives are effectiveness, less menstrual cramping and blood loss, less pelvic infection and ectopic pregnancy, and less ovarian and uterine cancer.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "C25",
+  "level": "easy",
+  "type": "written",
+  "q": "Complete: Disadvantages of IUD: …",
+  "model": "Insertion and removal and follow up require trained health personnel with appropriate equipment and facilities; insertion sometimes is painful; may cause irregular or heavy bleeding and anemia; occasionally severe abdominal cramping.",
+  "hint": "Four disadvantages.",
+  "explain": "The disadvantages of the IUD are the need for trained personnel, painful insertion, irregular or heavy bleeding with anemia, and severe abdominal cramping.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "C26",
+  "level": "easy",
+  "type": "written",
+  "q": "Complete: Advantage of IUD includes: …",
+  "model": "Highly effective, long term, easy to use, no re-supply problems, reversible, inexpensive; very safe if side effects receive proper care.",
+  "hint": "Highly effective and long term — and very safe.",
+  "explain": "The IUD is highly effective, long term, easy to use, reversible and inexpensive, and very safe if side effects receive proper care.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "C27",
+  "level": "easy",
+  "type": "written",
+  "q": "Complete: Advantages of condom are: …",
+  "model": "Easy to use, effective, inexpensive, easily obtained; protect against sexually transmitted disease including AIDS.",
+  "hint": "Easy, effective, cheap — and STD protection.",
+  "explain": "Condoms are easy to use, effective, inexpensive and easily obtained, and protect against sexually transmitted disease including AIDS.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "C28",
+  "level": "easy",
+  "type": "written",
+  "q": "Complete: Contraindication of vasectomy are: …",
+  "model": "Diabetic patient; anemic patient; skin infection.",
+  "hint": "Three contraindications.",
+  "explain": "Vasectomy is contraindicated in a diabetic patient, an anemic patient, and with skin infection.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "MT1",
+  "level": "easy",
+  "type": "written",
+  "q": "Match: IUD",
+  "model": "A small plastic or metal device placed in the uterus.",
+  "hint": "What is the IUD?",
+  "explain": "IUD → a small plastic or metal device placed in the uterus.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "MT2",
+  "level": "easy",
+  "type": "written",
+  "q": "Match: Vasectomy",
+  "model": "The sterilization procedure of male.",
+  "hint": "Sterilization of whom?",
+  "explain": "Vasectomy → the sterilization procedure of male.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "MT3",
+  "level": "easy",
+  "type": "written",
+  "q": "Match: Oral contraceptive",
+  "model": "Can be used to regulate menstrual cycle.",
+  "hint": "What can it regulate?",
+  "explain": "Oral contraceptive → can be used to regulate menstrual cycle.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "MT4",
+  "level": "easy",
+  "type": "written",
+  "q": "Match: Progesterone-only pills",
+  "model": "Doesn't affect lactation.",
+  "hint": "What do they not affect?",
+  "explain": "Progesterone-only pills → doesn't affect lactation.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "MT5",
+  "level": "easy",
+  "type": "written",
+  "q": "Match: Norplant",
+  "model": "Consists of six tiny silicone rubber capsules containing the progestin levonorgestrel.",
+  "hint": "Six capsules — containing what?",
+  "explain": "Norplant → consists of six tiny silicone rubber capsules containing the progestin levonorgestrel.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "MT6",
+  "level": "easy",
+  "type": "written",
+  "q": "Match: Condom",
+  "model": "Is a barrier method for contraception.",
+  "hint": "Which kind of method is the condom?",
+  "explain": "Condom → is a barrier method for contraception.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "MT7",
+  "level": "easy",
+  "type": "written",
+  "q": "Match: Tubal ligation",
+  "model": "Is a surgical method for contraception.",
+  "hint": "Which kind of method is tubal ligation?",
+  "explain": "Tubal ligation → is a surgical method for contraception.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "MT8",
+  "level": "easy",
+  "type": "written",
+  "q": "Match: IUD",
+  "model": "Very safe if side effects receive proper care.",
+  "hint": "How safe is the IUD?",
+  "explain": "IUD → very safe if side effects receive proper care.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "MT9",
+  "level": "easy",
+  "type": "written",
+  "q": "Match: Combined pills",
+  "model": "May decrease quantity of breast milk.",
+  "hint": "What may they decrease?",
+  "explain": "Combined pills → may decrease quantity of breast milk.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "MT10",
+  "level": "easy",
+  "type": "written",
+  "q": "Match: Mini pills",
+  "model": "Does not affect lactation.",
+  "hint": "What do they not affect?",
+  "explain": "Mini pills → does not affect lactation.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "MT11",
+  "level": "easy",
+  "type": "written",
+  "q": "Match: Barrier method",
+  "model": "They protect against sexually transmitted diseases.",
+  "hint": "What do barrier methods protect against?",
+  "explain": "Barrier method → they protect against sexually transmitted diseases.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "MT12",
+  "level": "easy",
+  "type": "written",
+  "q": "Match: Spermicidal products",
+  "model": "Keeping the sperm from entering the woman's vagina.",
+  "hint": "What do they keep out?",
+  "explain": "Spermicidal products → keeping the sperm from entering the woman's vagina.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "MT13",
+  "level": "easy",
+  "type": "written",
+  "q": "Match: Vasectomy",
+  "model": "Permanent; a single, quick procedure leads to lifelong, safe, and very effective family planning.",
+  "hint": "Permanent — a single quick procedure leads to what?",
+  "explain": "Vasectomy → permanent; a single, quick procedure leads to lifelong, safe, and very effective family planning.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "MT14",
+  "level": "easy",
+  "type": "written",
+  "q": "Match: Tubal ligation",
+  "model": "Permanent method in which the fallopian tubes are closed so the ovum cannot travel through them to meet the sperm.",
+  "hint": "Permanent — the tubes are closed so what cannot happen?",
+  "explain": "Tubal ligation → permanent method in which the fallopian tubes are closed so the ovum cannot travel through them to meet the sperm.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "MT15",
+  "level": "easy",
+  "type": "written",
+  "q": "Match: Implanon",
+  "model": "Consists of only one thread and could be left for 3 years.",
+  "hint": "One thread — for how many years?",
+  "explain": "Implanon → consists of only one thread and could be left for 3 years.",
+  "src": "البنك المشترك"
+ },
+ {
+  "id": "MT16",
+  "level": "easy",
+  "type": "written",
+  "q": "Match: DMPA",
+  "model": "Convenient only every 3 months.",
+  "hint": "How often is it given?",
+  "explain": "DMPA → convenient only every 3 months.",
+  "src": "البنك المشترك"
+ }
+];
+const AM_MCQ = [
+ {
+  "id": "Q-PY-19",
+  "q": "You are evaluating a patient in the clinic setting who has been taking oral contraceptives for several years, without side effects. Vital signs are stable and the patient denies any pain or tenderness. On examination, you note a small erythematous area of approximately 2 cm on her right lower leg. She denies any traumatic injury and says this is a recent onset of a few days. Based on this information you would",
+  "options": [
+   "instruct the patient to use warm compresses for several days and keep the leg elevated as much as possible.",
+   "have the patient wear flats rather than heels to modify her gait and help alleviate this issue.",
+   "refer the patient to the health care provider for additional diagnostic work up.",
+   "have the patient take an over-the-counter (OTC) nonsteroidal anti-inflammatory drug (NSAID) and return to the clinic if the problem persists."
+  ],
+  "correct": 2,
+  "explain": "Because the patient has a history of oral contraceptive use, the nurse must assess and evaluate findings relative to ACHES (warning signs of oral contraceptives). Thus the patient should be worked up for the possibility of a superficial or deep vein thrombosis (DVT).",
+  "src": "Special O.Nursing Questions"
+ },
+ {
+  "id": "Q-PY-6",
+  "q": "When instructing a patient in the use of spermicidal foam or gel, it is important to include the information that",
+  "options": [
+   "effectiveness is about 85%.",
+   "douching should be avoided for at least 6 hours.",
+   "it should be inserted 1 to 2 hours before intercourse.",
+   "one application is effective for several hours."
+  ],
+  "correct": 1,
+  "explain": "Douching within 6 hours of intercourse would remove the spermicide and increase the risk of pregnancy. One application is effective for approximately 1 hour. Note: the source's \"inserted 15 minutes before intercourse\" conflicts with the book (5–10 minutes) — the book governs; the spermicide-alone effectiveness figure also differs across the two crawls (72% vs 29%).",
+  "src": "Special O.Nursing Questions"
+ },
+ {
+  "id": "Q-PY-17",
+  "q": "Which of the following statements is correct regarding the use of contraception and the occurrence of sexually transmitted diseases (STDs)?",
+  "options": [
+   "As long as the oral contraception method is used correctly, there is no transmission of STDs during sexual activity.",
+   "Oral contraceptives provide the greatest protection against getting STDs.",
+   "Barrier methods, if used correctly, are more likely to protect individuals from STDs as compared with other contraceptive methods.",
+   "It is less likely to see transmission of STDs if patients engage in oral sex as opposed to vaginal penetration."
+  ],
+  "correct": 2,
+  "explain": "The correct use of barrier methods helps protect against the transmission of STDs compared with other methods of contraception. The use of oral contraceptives has no effect on the transmission of STDs.",
+  "src": "Special O.Nursing Questions"
+ }
+];
+const AM_QA = [
+ {
+  "id": "Q-PY-20",
+  "q": "The client who has had an intrauterine device (IUD) inserted should be instructed to:",
+  "a": "Check the placement of the string: if the string is shorter or longer than when checked previously, contact the physician. (Answer C in the source.)\n[Flag: options (b)–(d) are cut in the source — only option (a), \"use a vinegar douche weekly for 4 weeks\", and the answer marker C survive; presented as a reveal-card, never as a scored question.]",
+  "src": "Special O.Nursing Questions"
+ },
+ {
+  "id": "Q-LC-TL-SATA",
+  "q": "The nurse is reviewing the educational packet provided to a client about tubal ligation. Which information regarding this procedure is important for the nurse to share? (Select all that apply.)",
+  "a": "A and D — It is highly unlikely that you will become pregnant after the procedure; sterilization offers no protection against STIs.\nA woman is unlikely to become pregnant after tubal ligation. However, sterilization offers no protection against STIs and is not 100% effective. Typically, the menstrual cycle remains the same after a tubal ligation.\n[Flag: SATA — presented as a reveal-card, never as a scored question.]",
+  "src": "Special O.Nursing Questions"
+ }
+];
+
+/* ================= shared helpers ================= */
+function $(id){ return document.getElementById(id); }
+function scrollTop(){ try{ window.scrollTo(0,0); }catch(e){} }
+function esc(s){ const d=document.createElement("div"); d.textContent=s; return d.innerHTML; }
+function srcTag(src, special){
+  return '<span class="srctag' + (special ? ' special' : '') + '">المصدر: ' + esc(src) + '</span>';
+}
+
+/* ================= screens ================= */
+const SCREENS = {'home':'screen-home','settings':'screen-settings','study':'screen-study',
+                 'summary':'screen-summary','quiz':'quiz','results':'results'};
+function showScreen(name){
+  Object.keys(SCREENS).forEach(k=>{
+    const el = $(SCREENS[k]);
+    if(!el) return;
+    const on = (k === name);
+    el.classList.toggle('active', on);
+    el.classList.toggle('hidden', !on);
+  });
+  if(name === 'home'){ const h = $('home'); if(h) h.classList.remove('hidden'); }
+  scrollTop();
+}
+
+/* ================= toast + rotating dhikr ================= */
+const DHIKR = ['سبحان الله وبحمده','سبحان الله العظيم','اللهم صل وسلم على سيدنا محمد'];
+let dhIdx = 0;
+setInterval(() => {
+  const el = $('dhikr');
+  if(!el) return;
+  el.classList.add('fade');
+  setTimeout(() => { dhIdx = (dhIdx+1) % DHIKR.length; el.textContent = DHIKR[dhIdx]; el.classList.remove('fade'); }, 450);
+}, 4000);
+let toastTimer = null;
+function toast(msg){
+  const t = $('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+}
+function ringSet(el, pct){
+  const C = 2 * Math.PI * 24;
+  el.style.strokeDasharray = C;
+  el.style.strokeDashoffset = C * (1 - pct/100);
+}
+function ringSetBig(el, r, pct){
+  const C = 2 * Math.PI * r;
+  el.style.strokeDasharray = C;
+  el.style.strokeDashoffset = C * (1 - pct/100);
+}
+function shuffle(a){
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+}
+
+/* ================= flashcard data (from QUESTIONS + AM arrays) ================= */
+const FC_KNOWN_KEY = 'onursing_m5_fc_known_v1';
+const FC_MISSED_KEY = 'onursing_m5_fc_missed_v1';
+let fcKnown = new Set(JSON.parse(localStorage.getItem(FC_KNOWN_KEY) || '[]'));
+let fcMissed = new Set(JSON.parse(localStorage.getItem(FC_MISSED_KEY) || '[]'));
+function saveFcKnown(){ try{ localStorage.setItem(FC_KNOWN_KEY, JSON.stringify([...fcKnown])); }catch(e){} }
+function saveFcMissed(){ try{ localStorage.setItem(FC_MISSED_KEY, JSON.stringify([...fcMissed])); }catch(e){} }
+
+const FC_SECTIONS = [
+  {name:"Define / Short notes", cards: QUESTIONS.filter(q=>q.type==="written" && q.id[0]==="D").map(q=>({id:q.id, q:q.q, qHtml:esc(q.q), aHtml:'<div class="ans-box"><div class="ans-label">✅ الإجابة النموذجية</div><p style="white-space:pre-line;">'+esc(q.model)+'</p></div>', sec:"Define / Short notes", src:q.src, special:false}))},
+  {name:"Complete", cards: QUESTIONS.filter(q=>q.type==="written" && q.id[0]==="C").map(q=>({id:q.id, q:q.q, qHtml:esc(q.q), aHtml:'<div class="ans-box"><div class="ans-label">✅ الإجابة النموذجية</div><p style="white-space:pre-line;">'+esc(q.model)+'</p></div>', sec:"Complete", src:q.src, special:false}))},
+  {name:"List / Enumerate", cards: QUESTIONS.filter(q=>q.type==="written" && q.id[0]==="L").map(q=>({id:q.id, q:q.q, qHtml:esc(q.q), aHtml:'<div class="ans-box"><div class="ans-label">✅ الإجابة النموذجية</div><p style="white-space:pre-line;">'+esc(q.model)+'</p></div>', sec:"List / Enumerate", src:q.src, special:false}))},
+  {name:"Matching", cards: QUESTIONS.filter(q=>q.type==="written" && q.id.indexOf("MT")===0).map(q=>({id:q.id, q:q.q, qHtml:esc(q.q), aHtml:'<div class="ans-box"><div class="ans-label">✅ الإجابة النموذجية</div><p style="white-space:pre-line;">'+esc(q.model)+'</p></div>', sec:"Matching", src:q.src, special:false}))},
+  {name:"Special O.Nursing Questions", cards: AM_MCQ.map(item=>({id:item.id, q:item.q, qHtml:esc(item.q)+'<ol class="am-opts" type="a">'+item.options.map(o=>"<li>"+esc(o)+"</li>").join("")+"</ol>", aHtml:'<div class="ans-box"><div class="ans-label">✅ الإجابة الصحيحة</div><p><b>Correct answer: '+esc(item.options[item.correct])+'</b></p><p>'+esc(item.explain)+'</p></div>', sec:"Special O.Nursing Questions", src:item.src, special:true}))},
+  {name:"Special O.Nursing Questions", cards: AM_QA.map(item=>({id:item.id, q:item.q, qHtml:esc(item.q), aHtml:'<div class="ans-box"><div class="ans-label">✅ الإجابة</div><p style="white-space:pre-line;">'+esc(item.a)+'</p></div>', sec:"Special O.Nursing Questions", src:item.src, special:true}))},
+];
+const allFcCards = [];
+FC_SECTIONS.forEach((sec, si) => sec.cards.forEach(c => allFcCards.push({...c, secIdx: si})));
+const fcCardById = Object.fromEntries(allFcCards.map(c => [c.id, c]));
+
+/* home sections (topic cards): 0 MCQ, 1 True/False, 2 Essay, 3 Special */
+const HOME_SECTIONS = [
+  {name:"MCQ", meta:"اختيار من متعدد", count:12, kind:"scored", type:"mcq", cardId:"sec-mcq"},
+  {name:"True / False", meta:"صح وخطأ", count:24, kind:"scored", type:"tf", cardId:"sec-tf"},
+  {name:"Essay Flashcards", meta:"بطاقات مقالية", count:68, kind:"fc", group:"essay", cardId:"flashcards"},
+  {name:"Special O.Nursing Questions", meta:"5 أسئلة", count:5, kind:"fc", group:"special", cardId:"special"},
+];
+let selected = new Set(HOME_SECTIONS.map((_, i) => i));
+let fcQueue = [], fcIdx = 0, fcFlipped = false;
+let optScope = 'all', optShuffle = 'off';
+let requeueMode = 'none', requeueMins = 3;
+let endQueue = [], dueList = [], reviewIds = new Set();
+
+/* ================= scored-quiz globals (DO NOT rename) ================= */
+const LVL = {easy:"سهل", med:"متوسط", hard:"صعب"};
+const LVLCLS = {easy:"easy", med:"med", hard:"hard"};
+const KEY = "onursing_maternity_module5_progress_v1";
+let selectedLvl = "all";
+let queue = [], idx = 0, score = 0, answered = 0, results = [];
+let levelStats = {easy:{t:0,c:0}, med:{t:0,c:0}, hard:{t:0,c:0}};
+let locked = false;
+
+function loadProg(){ try{ return JSON.parse(localStorage.getItem(KEY)) || {}; }catch(e){ return {}; } }
+function saveProg(p){ try{ localStorage.setItem(KEY, JSON.stringify(p)); }catch(e){} }
+
+/* ================= HOME ================= */
+function sectionStats(si){
+  const sec = HOME_SECTIONS[si];
+  if(sec.kind === "scored"){
+    const p = loadProg();
+    const done = p.done || {}, correct = p.correct || {};
+    const ids = QUESTIONS.filter(q=>q.type===sec.type).map(q=>q.id);
+    const a = ids.filter(id=>done[id]).length;
+    const c = ids.filter(id=>correct[id]).length;
+    return {total: ids.length, known: a, correct: c};
+  }
+  const ids = sec.group === "essay"
+    ? allFcCards.filter(c=>c.secIdx < 4).map(c=>c.id)
+    : allFcCards.filter(c=>c.secIdx >= 4).map(c=>c.id);
+  const k = ids.filter(id=>fcKnown.has(id)).length;
+  return {total: ids.length, known: k};
+}
+function renderTopics(){
+  const list = $('topic-list');
+  list.innerHTML = '';
+  HOME_SECTIONS.forEach((sec, i) => {
+    const {total, known: k, correct} = sectionStats(i);
+    const pct = total ? Math.round(k/total*100) : 0;
+    const card = document.createElement('div');
+    card.className = 'topic-card' + (selected.has(i) ? ' checked' : '');
+    card.id = sec.cardId;
+    const meta = sec.kind === "scored"
+      ? (sec.meta + ' • ' + k + '/' + total + ' answered' + (correct ? ' • ' + correct + ' صح' : ''))
+      : (sec.meta + ' • ' + k + '/' + total + ' known');
+    card.innerHTML =
+      '<div class="topic-card-top">' +
+        '<div class="topic-check">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round"><path d="M4 12l5 5L20 6"/></svg>' +
+        '</div>' +
+        '<div class="topic-progress-ring">' +
+          '<svg viewBox="0 0 30 30">' +
+            '<circle class="bg-ring" cx="15" cy="15" r="12"/>' +
+            '<circle class="fg-ring" cx="15" cy="15" r="12"/>' +
+          '</svg>' +
+          '<div class="pct">' + pct + '%</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="topic-info">' +
+        '<div class="t-name" dir="ltr" style="text-align:left">' + sec.name + '</div>' +
+        '<div class="t-meta">' + meta + '</div>' +
+      '</div>';
+    const fg = card.querySelector('.fg-ring');
+    const C = 2*Math.PI*12;
+    fg.style.strokeDasharray = C;
+    fg.style.strokeDashoffset = C*(1-pct/100);
+    card.addEventListener('click', () => {
+      selected.has(i) ? selected.delete(i) : selected.add(i);
+      renderTopics(); updateSelBar();
+    });
+    list.appendChild(card);
+  });
+}
+function updateSelBar(){
+  $('sel-count').textContent = selected.size + ' أقسام محددة';
+  $('btn-start').disabled = selected.size === 0;
+}
+function updateHomeStats(){
+  $('stat-total').textContent = QUESTIONS.filter(q=>q.type!=="written").length;
+  $('stat-topics').textContent = allFcCards.length;
+  $('stat-known').textContent = Math.round(fcKnown.size/allFcCards.length*100) + '%';
+  renderMissedBin();
+}
+function renderMissedBin(){
+  const arr = allFcCards.filter(c => fcMissed.has(c.id));
+  $('missed-count').textContent = arr.length + ' بطاقة مستنية مراجعة';
+  $('btn-review-missed').disabled = arr.length === 0;
+}
+$('btn-review-missed').addEventListener('click', () => {
+  fcQueue = allFcCards.filter(c => fcMissed.has(c.id));
+  if(!fcQueue.length) return;
+  fcIdx = 0; endQueue = []; dueList = []; reviewIds = new Set();
+  showScreen('study');
+  renderFcCard();
+  toast('مراجعة سريعة للبطاقات اللي مش عارفها ⚡');
+});
+$('btn-select-all').addEventListener('click', () => {
+  selected = selected.size === HOME_SECTIONS.length ? new Set() : new Set(HOME_SECTIONS.map((_,i)=>i));
+  renderTopics(); updateSelBar();
+});
+$('btn-reset-all').addEventListener('click', () => {
+  let ok = true;
+  if(typeof confirm === 'function') ok = confirm('متأكد عايز تمسح كل التقدم المحفوظ؟');
+  if(!ok) return;
+  fcKnown = new Set(); saveFcKnown(); fcMissed = new Set(); saveFcMissed();
+  try{ localStorage.removeItem(KEY); }catch(e){}
+  renderTopics(); updateHomeStats(); refreshHome();
+});
+function refreshHome(){
+  const p = loadProg();
+  const done = p.done || {}, correct = p.correct || {};
+  const n = Object.keys(done).length;
+  const c = Object.keys(correct).length;
+  $('home-stats').textContent = n ? ("تقدّمك: أجبت على " + n + " سؤال من 36 — إجابات صحيحة: " + c + (p.best!=null ? (" • أفضل نتيجة: " + p.best + "%") : "")) : "ابدأ من السهل وتدرّج — كل سؤال معه تلميح وشرح.";
+  $('btn-resume').classList.toggle('hidden', !n || n>=36);
+}
+document.querySelectorAll("#levels .lvl").forEach(b=>{
+  b.addEventListener("click", ()=>{
+    document.querySelectorAll("#levels .lvl").forEach(x=>x.classList.remove("on"));
+    b.classList.add("on"); selectedLvl = b.dataset.lvl;
+  });
+});
+/* primary Start: scored sections -> timed quiz (full 36, timer rule);
+   flashcards only -> settings screen for the flip-card study flow */
+function onPrimaryStart(){
+  const scoredSel = selected.has(0) || selected.has(1);
+  const fcSel = selected.has(2) || selected.has(3);
+  if(scoredSel){ startQuiz(false); return; }
+  if(fcSel){ renderSettings(); showScreen('settings'); return; }
+}
+$('btn-start').addEventListener('click', onPrimaryStart);
+$('btn-resume').addEventListener('click', ()=>startQuiz(true));
+
+/* ================= SETTINGS (flashcard study) ================= */
+function fcSelectedGroups(){
+  const groups = [];
+  if(selected.has(2)) groups.push(0, 1, 2, 3);
+  if(selected.has(3)) groups.push(4, 5);
+  return groups;
+}
+function queuePreview(){
+  let cards = [];
+  fcSelectedGroups().forEach(i => cards.push(...FC_SECTIONS[i].cards));
+  if(optScope === 'unknown') cards = cards.filter(c => !fcKnown.has(c.id));
+  return cards;
+}
+function renderSettings(){
+  const cards = [];
+  fcSelectedGroups().forEach(i => cards.push(...FC_SECTIONS[i].cards));
+  const k = cards.filter(c => fcKnown.has(c.id)).length;
+  const pct = cards.length ? Math.round(k/cards.length*100) : 0;
+  ringSet($('settings-ring'), pct);
+  $('settings-pct').textContent = pct + '%';
+  $('settings-progress-txt').textContent = k + ' من ' + cards.length + ' بطاقة معروفة';
+  updateQueueNote();
+}
+function updateQueueNote(){
+  const n = queuePreview().length;
+  $('queue-note').textContent = n ? ('عدد البطاقات في الجلسة: ' + n) : 'مفيش بطاقات — كل البطاقات المحددة معروفة ✓';
+  $('btn-start-study').disabled = n === 0;
+}
+document.querySelectorAll('.opt-btn').forEach(b => {
+  b.addEventListener('click', () => {
+    const g = b.dataset.group;
+    document.querySelectorAll('.opt-btn[data-group="' + g + '"]').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    if(g === 'scope') optScope = b.dataset.val;
+    if(g === 'shuffle') optShuffle = b.dataset.val;
+    if(g === 'requeue'){
+      requeueMode = b.dataset.val;
+      $('requeue-time-row').classList.toggle('disabled', requeueMode !== 'time');
+    }
+    updateQueueNote();
+  });
+});
+document.querySelectorAll('.time-chip').forEach(ch => {
+  ch.addEventListener('click', () => {
+    document.querySelectorAll('.time-chip').forEach(x => x.classList.remove('active'));
+    ch.classList.add('active');
+    requeueMins = parseInt(ch.dataset.mins, 10);
+  });
+});
+$('btn-back-home').addEventListener('click', () => { renderTopics(); updateHomeStats(); showScreen('home'); });
+$('btn-clear-selection-progress').addEventListener('click', () => {
+  fcSelectedGroups().forEach(i => FC_SECTIONS[i].cards.forEach(c => fcKnown.delete(c.id)));
+  saveFcKnown(); renderSettings(); renderTopics(); updateHomeStats();
+});
+$('btn-start-study').addEventListener('click', () => {
+  fcQueue = queuePreview();
+  if(optShuffle === 'on') shuffle(fcQueue);
+  fcIdx = 0; endQueue = []; dueList = []; reviewIds = new Set();
+  showScreen('study');
+  renderFcCard();
+});
+
+/* ================= STUDY (flip flashcards) ================= */
+function renderFcCard(){
+  const c = fcQueue[fcIdx];
+  if(!c){ showFcSummary(); return; }
+  fcFlipped = false;
+  $('flashcard').classList.remove('flipped');
+  $('mark-row').classList.add('hidden');
+  $('fc-qnum').textContent = c.id.toUpperCase();
+  $('fc-qtitle').innerHTML = c.qHtml;
+  $('fc-src').innerHTML = srcTag(c.src, c.special);
+  $('fc-answer').innerHTML = c.aHtml;
+  $('card-sec').textContent = c.sec;
+  $('card-ext').classList.add('hidden');
+  $('card-review').classList.toggle('hidden', !reviewIds.has(c.id));
+  $('card-known').classList.toggle('hidden', !fcKnown.has(c.id));
+  $('qcounter').textContent = (fcIdx+1) + ' / ' + fcQueue.length;
+  $('qbar-fill').style.width = (fcQueue.length ? (fcIdx/fcQueue.length*100) : 0) + '%';
+  $('btn-prev').disabled = fcIdx === 0;
+  $('fc-answer').scrollTop = 0;
+}
+$('flashcard').addEventListener('click', () => {
+  fcFlipped = !fcFlipped;
+  $('flashcard').classList.toggle('flipped', fcFlipped);
+  $('mark-row').classList.toggle('hidden', !fcFlipped);
+});
+$('btn-know').addEventListener('click', e => {
+  e.stopPropagation();
+  const id = fcQueue[fcIdx].id;
+  fcKnown.add(id); saveFcKnown();
+  fcMissed.delete(id); saveFcMissed();
+  dueList = dueList.filter(d => d.id !== id);
+  reviewIds.delete(id);
+  nextFcCard();
+});
+$('btn-dunno').addEventListener('click', e => {
+  e.stopPropagation();
+  const id = fcQueue[fcIdx].id;
+  fcKnown.delete(id); saveFcKnown();
+  fcMissed.add(id); saveFcMissed();
+  if(requeueMode === 'end'){
+    if(!endQueue.includes(id)) endQueue.push(id);
+  } else if(requeueMode === 'time'){
+    dueList = dueList.filter(d => d.id !== id);
+    dueList.push({id, due: Date.now() + requeueMins*60000});
+    toast('هترجعلك بعد ' + (requeueMins === 1 ? 'دقيقة' : requeueMins + ' دقايق') + ' ⏰');
+  }
+  nextFcCard();
+});
+function pumpDue(){
+  const now = Date.now();
+  const dueNow = dueList.filter(d => d.due <= now);
+  if(!dueNow.length) return;
+  dueList = dueList.filter(d => d.due > now);
+  const remaining = new Set(fcQueue.slice(fcIdx+1).map(c => c.id));
+  const insert = [];
+  dueNow.forEach(d => {
+    if(!remaining.has(d.id) && fcCardById[d.id]){
+      insert.push(fcCardById[d.id]); remaining.add(d.id); reviewIds.add(d.id);
+    }
+  });
+  if(insert.length) fcQueue = fcQueue.slice(0, fcIdx+1).concat(insert, fcQueue.slice(fcIdx+1));
+}
+function nextFcCard(){
+  pumpDue();
+  if(fcIdx < fcQueue.length - 1){ fcIdx++; renderFcCard(); }
+  else if(requeueMode === 'end' && endQueue.length){
+    fcQueue = endQueue.map(id => fcCardById[id]).filter(Boolean);
+    endQueue = [];
+    reviewIds = new Set(fcQueue.map(c => c.id));
+    fcIdx = 0;
+    toast('جولة مراجعة للبطاقات الغلط 🔁');
+    renderFcCard();
+  }
+  else {
+    $('qbar-fill').style.width = '100%';
+    setTimeout(showFcSummary, 350);
+  }
+}
+$('btn-next-card').addEventListener('click', nextFcCard);
+$('btn-prev').addEventListener('click', () => { if(fcIdx > 0){ fcIdx--; renderFcCard(); } });
+$('btn-shuffle').addEventListener('click', () => {
+  const rest = fcQueue.slice(fcIdx + 1);
+  shuffle(rest);
+  fcQueue = fcQueue.slice(0, fcIdx + 1).concat(rest);
+  renderFcCard();
+});
+$('btn-exit-study').addEventListener('click', () => {
+  renderTopics(); updateHomeStats(); showScreen('home');
+});
+document.addEventListener('keydown', e => {
+  if(!$('screen-study').classList.contains('active')) return;
+  if(e.code === 'Space'){ e.preventDefault(); $('flashcard').click(); }
+  if(e.code === 'ArrowLeft'){ $('btn-next-card').click(); }
+  if(e.code === 'ArrowRight'){ $('btn-prev').click(); }
+});
+
+/* ================= SUMMARY (flashcards) ================= */
+function showFcSummary(){
+  const k = fcQueue.filter(c => fcKnown.has(c.id)).length;
+  const total = fcQueue.length;
+  const pct = total ? Math.round(k/total*100) : 0;
+  ringSetBig($('results-ring'), 65, pct);
+  setTimeout(() => { $('results-pct').textContent = pct + '%'; }, 60);
+  $('results-known').textContent = k;
+  $('results-unknown').textContent = total - k;
+  $('results-total').textContent = total;
+  $('results-title').textContent = pct === 100 ? 'ممتاز! كلها معروفة 🎉' : pct >= 70 ? 'عاش! قربت تخلصها 💪' : 'خلصت الجلسة 🩺';
+  $('results-sub').textContent = pct === 100 ? 'مفيش حاجة تراجعها' : 'راجع البطاقات اللي لسه مش عارفها تحت';
+
+  const list = $('review-list');
+  list.innerHTML = '';
+  const unknown = fcQueue.filter(c => !fcKnown.has(c.id));
+  if(!unknown.length){
+    list.innerHTML = '<div class="empty-review">مفيش بطاقات محتاجة مراجعة — كله تمام ✓</div>';
+  } else {
+    unknown.forEach(c => {
+      const item = document.createElement('div');
+      item.className = 'review-item';
+      item.innerHTML = '<div class="rq">' + c.id.toUpperCase() + '. ' + c.qHtml + '</div>' +
+        '<div class="ra">' + c.aHtml + '</div>';
+      item.addEventListener('click', () => item.classList.toggle('open'));
+      list.appendChild(item);
+    });
+  }
+  renderTopics(); updateHomeStats();
+  showScreen('summary');
+}
+$('btn-retry-unknown').addEventListener('click', () => {
+  fcQueue = fcQueue.filter(c => !fcKnown.has(c.id));
+  if(!fcQueue.length){ showScreen('home'); return; }
+  if(optShuffle === 'on') shuffle(fcQueue);
+  fcIdx = 0;
+  showScreen('study');
+  renderFcCard();
+});
+$('btn-go-home-2').addEventListener('click', () => { renderTopics(); updateHomeStats(); showScreen('home'); });
+$('btn-summary-exit').addEventListener('click', () => { renderTopics(); updateHomeStats(); showScreen('home'); });
+
+/* ================= SCORED QUIZ (MCQ + True/False, flip-card design) ================= */
+function buildQueue(resume){
+  /* The timed attempt always runs the FULL 36 scored questions (timer rule);
+     the level filter only narrows practice, and the snippet forces 'all'
+     for a timed start anyway (v2 parity). */
+  let pool = QUESTIONS.filter(q => q.type!=="written" && (selectedLvl==="all" || q.level===selectedLvl));
+  if(resume){
+    const p = loadProg(); const done = p.done || {};
+    pool = pool.filter(q => !done[q.id]);
+    if(!pool.length){ pool = QUESTIONS.filter(q => q.type!=="written" && (selectedLvl==="all" || q.level===selectedLvl)); }
+  }
+  return pool.slice();
+}
+function startQuiz(resume){
+  queue = buildQueue(resume); idx = 0; score = 0; answered = 0; results = [];
+  levelStats = {easy:{t:0,c:0}, med:{t:0,c:0}, hard:{t:0,c:0}};
+  queue.forEach(q=>{ if(q.type!=="written") levelStats[q.level].t++; });
+  showScreen('quiz');
+  renderQ();
+}
+function cur(){ return queue[idx]; }
+function renderQ(){
+  const q = cur(); locked = false;
+  $("quiz-card").classList.remove("flipped");
+  $("prog-fill").style.width = (idx/queue.length*100) + "%";
+  $("q-count").textContent = (idx+1) + " / " + queue.length;
+  $("q-badge").innerHTML = '<span class="badge '+LVLCLS[q.level]+'">'+LVL[q.level]+'</span>';
+  $("q-score").textContent = "صح: " + score + " / " + answered;
+  $("quiz-sec").textContent = q.type === "mcq" ? "MCQ" : "True / False";
+  $("quiz-qnum").textContent = q.id.toUpperCase();
+  $("q-stem").innerHTML = q.q + (q.ar ? '<span class="ar-note">'+q.ar+'</span>' : "");
+  $("q-src").innerHTML = '<span class="srctag">المصدر: ' + esc(q.src || "Special Notes") + '</span>';
+  $("q-hint").classList.remove("show"); $("q-hint").textContent = q.hint || "";
+  $("btn-hint").style.display = q.hint ? "" : "none";
+  const ex = $("q-explain"); ex.classList.remove("show","ok","no"); ex.innerHTML = "";
+  const mo = $("q-model"); mo.classList.remove("show"); mo.textContent = "";
+  $("btn-next").classList.add("hidden"); $("btn-finish").classList.add("hidden");
+  const body = $("q-body"); body.innerHTML = "";
+  if(q.type === "mcq"){
+    const box = document.createElement("div"); box.className = "opts";
+    q.options.forEach((op,i)=>{
+      const b = document.createElement("button"); b.className = "opt"; b.textContent = op;
+      b.addEventListener("click", ()=>answerMcq(i, b)); box.appendChild(b);
+    });
+    body.appendChild(box);
+  } else if(q.type === "tf"){
+    const box = document.createElement("div"); box.className = "tf";
+    [["True", true], ["False", false]].forEach(([label, val])=>{
+      const b = document.createElement("button"); b.className = "opt"; b.textContent = label;
+      b.addEventListener("click", ()=>answerTf(val, b)); box.appendChild(b);
+    });
+    body.appendChild(box);
+  }
+}
+$("btn-hint").addEventListener("click", ()=>{ $("q-hint").classList.toggle("show"); });
+/* tap the flipped card to flip back to the question */
+$("quiz-card").addEventListener("click", (e)=>{
+  /* an option tap bubbles up here — it must NOT flip the card back, or the
+     explanation would vanish the instant the student answers (bug found
+     by the fold-in harness 2026-11-23) */
+  if(e.target.closest(".opt")) return;
+  if($("quiz-card").classList.contains("flipped")) $("quiz-card").classList.remove("flipped");
+});
+function markProgress(id, ok){
+  const p = loadProg(); p.done = p.done || {}; p.correct = p.correct || {};
+  p.done[id] = true; if(ok) p.correct[id] = true; saveProg(p);
+}
+function finishAnswer(ok){
+  answered++; if(ok) score++;
+  markProgress(cur().id, ok);
+  results.push({id:cur().id, ok:ok});
+  $("q-score").textContent = "صح: " + score + " / " + answered;
+  showNav();
+}
+function showNav(){
+  if(idx < queue.length-1){ $("btn-next").classList.remove("hidden"); }
+  else { $("btn-finish").classList.remove("hidden"); }
+}
+function answerMcq(i, btn){
+  if(locked) return; locked = true;
+  const q = cur(); const ok = (i === q.correct);
+  document.querySelectorAll("#q-body .opt").forEach((el, j)=>{
+    el.disabled = true;
+    if(j === q.correct) el.classList.add("correct");
+    if(j === i && !ok) el.classList.add("wrong");
+  });
+  const ex = $("q-explain");
+  ex.innerHTML = (ok ? "<b>✓ إجابة صحيحة.</b> " : "<b>✗ إجابة خاطئة.</b> الصح: <b>" + q.options[q.correct] + "</b><br>") + q.explain;
+  ex.classList.add("show", ok ? "ok" : "no");
+  finishAnswer(ok);
+  $("quiz-card").classList.add("flipped");
+}
+function answerTf(val, btn){
+  if(locked) return; locked = true;
+  const q = cur(); const ok = (val === q.correct);
+  document.querySelectorAll("#q-body .opt").forEach(el=>{
+    el.disabled = true;
+    const v = el.textContent === "True";
+    if(v === q.correct) el.classList.add("correct");
+    if(el === btn && !ok) el.classList.add("wrong");
+  });
+  const ex = $("q-explain");
+  ex.innerHTML = (ok ? "<b>✓ إجابة صحيحة.</b> " : "<b>✗ إجابة خاطئة.</b> الصح: <b>" + (q.correct ? "True" : "False") + "</b><br>") + q.explain;
+  ex.classList.add("show", ok ? "ok" : "no");
+  finishAnswer(ok);
+  $("quiz-card").classList.add("flipped");
+}
+$("btn-next").addEventListener("click", ()=>{ idx++; renderQ(); });
+$("btn-finish").addEventListener("click", showResults);
+$("btn-quiz-exit").addEventListener("click", ()=>{ renderTopics(); updateHomeStats(); refreshHome(); showScreen('home'); });
+function showResults(){
+  showScreen('results');
+  const total = results.length || 1;
+  const pct = Math.round(score/total*100);
+  $("res-pct").textContent = pct + "%";
+  const ring = $("ring-fg");
+  ring.style.strokeDashoffset = 408 - (408*pct/100);
+  const p = loadProg(); if(p.best==null || pct > p.best){ p.best = pct; saveProg(p); }
+  let msg = pct>=90 ? "ممتاز! الموضوع ده بقى في جيبك." : pct>=70 ? "كويس جداً — راجع الغلطات وهتبقى ممتاز." : pct>=50 ? "بداية كويسة — راجع الشرح والغلطات وحاول تاني." : "محتاج مراجعة — ارجع للشرح في الملف وحاول تاني.";
+  $("res-line").innerHTML = "أجبت صح على <b>" + score + "</b> من <b>" + total + "</b> سؤال<br>" + msg;
+  let rows = "<tr><th>المستوى</th><th>صح</th><th>من</th></tr>";
+  const agg = {easy:{t:0,c:0}, med:{t:0,c:0}, hard:{t:0,c:0}};
+  results.forEach(r=>{ const q = QUESTIONS.find(x=>x.id===r.id); if(!q) return; agg[q.level].t++; if(r.ok) agg[q.level].c++; });
+  ["easy","med","hard"].forEach(l=>{ if(agg[l].t) rows += "<tr><td>"+LVL[l]+"</td><td>"+agg[l].c+"</td><td>"+agg[l].t+"</td></tr>"; });
+  $("res-table").innerHTML = rows;
+}
+$("btn-retry").addEventListener("click", ()=>startQuiz(false));
+$("btn-home").addEventListener("click", ()=>{
+  renderTopics(); updateHomeStats(); refreshHome(); showScreen('home');
+});
+
+/* O.Nursing — QR-only protection: block copying, right-click, printing */
+document.addEventListener("contextmenu", function(e){ e.preventDefault(); });
+document.addEventListener("copy", function(e){ e.preventDefault(); });
+document.addEventListener("cut", function(e){ e.preventDefault(); });
+document.addEventListener("dragstart", function(e){ e.preventDefault(); });
+document.addEventListener("keydown", function(e){
+  if((e.ctrlKey || e.metaKey) && ["c","x","u","s","p","a"].indexOf(e.key.toLowerCase()) !== -1){ e.preventDefault(); }
+});
+
+
+/* ---------- INIT ---------- */
+renderTopics(); updateSelBar(); updateHomeStats(); refreshHome();
+</script>
+<script src="timer-snippet-v2.js"></script>
+</body>
+</html>
