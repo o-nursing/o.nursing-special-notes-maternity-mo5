@@ -5,7 +5,8 @@
  * WHAT IT IS
  *   A self-contained add-on for a module quiz page. It adds ONLY:
  *   (1) REQUIRED Name field + REQUIRED «رقمك في الكورس» field on the home
- *       screen (no Start without both),
+ *       screen (no Start without both) — rendered inside the sticky side
+ *       panel #tq-side when the page has one, else before #btn-start,
  *   (2) a mode toggle: timed (student picks 60 / 120 / 180 min or a custom
  *       15–600 min) or untimed (no countdown, no time limit),
  *   (3) a countdown for the CHOSEN duration in timed mode (gold bar,
@@ -36,7 +37,8 @@
  *   quiz, prog-fill, q-count, q-badge, q-score, q-stem, q-body,
  *   btn-hint, q-hint, q-explain, q-model, btn-next, btn-finish,
  *   results, res-pct, res-line, res-table, btn-retry, btn-home,
- *   flashcards, special.
+ *   flashcards, special. Optional: tq-side (sticky side panel holding
+ *   the registration fields + #btn-start; expiry hides it too).
  *   Page globals (same global scope, classic scripts): QUESTIONS
  *   [{id, level, type, q, options, correct, hint, explain, model}],
  *   selectedLvl, queue, idx, score, answered, results,
@@ -201,7 +203,17 @@
       '#tq-note b{color:var(--burg,#7C2D3E)}' +
       '#tq-timeup h1{color:#b3261e}' +
       '#tq-sent{margin-top:12px;font-size:14.5px;font-weight:700;line-height:1.9}' +
-      '#tq-sent.ok{color:#2e7d4f}#tq-sent.no{color:#b3261e}';
+      '#tq-sent.ok{color:#2e7d4f}#tq-sent.no{color:#b3261e}' +
+      /* compact side-panel sizing: when the fields live in #tq-side they
+         sit in a narrow sticky column, so tighter margins + padding. */
+      '#tq-side .tq-label{margin-top:10px;font-size:13.5px}' +
+      '#tq-side #tq-name,#tq-side #tq-num{padding:10px 12px;font-size:15px;margin-top:6px}' +
+      '#tq-side #tq-mode{margin-top:6px}' +
+      '#tq-side #tq-mode button{padding:9px 6px;font-size:14px}' +
+      '#tq-side #tq-dur{margin-top:6px}' +
+      '#tq-side #tq-dur .preset{padding:9px 6px;font-size:14px;min-width:60px}' +
+      '#tq-side #tq-dur-custom{padding:9px 10px;font-size:14px}' +
+      '#tq-side #tq-note{font-size:12.5px;margin-top:8px}';
     document.head.appendChild(st);
   }
 
@@ -209,7 +221,18 @@
     if ($('tq-name')) return;
     var startBtn = $('btn-start');
     if (!startBtn) return;
+    // Registration lives in the sticky side panel when the page has one
+    // (#tq-side, new home layout): the fields go in the panel, directly
+    // before Start. Otherwise fall back to Start's parent (old layout,
+    // where that parent was the fixed bottom bar).
+    var side = $('tq-side');
     var parent = startBtn.parentNode;
+    var anchor = startBtn;
+    if (side && !side.contains(startBtn)) { parent = side; anchor = null; }
+    function place(node) {
+      if (anchor) parent.insertBefore(node, anchor);
+      else parent.appendChild(node);
+    }
 
     var label1 = document.createElement('label');
     label1.setAttribute('for', 'tq-name');
@@ -291,14 +314,14 @@
     note.innerHTML = 'اختبار موقوت أو غير موقوت — انت اللي تختار. ' +
       'لو قفلت الصفحة ودخلت تاني، المحاولة بتكمل من مطرح ما وقفت، وبيتبعت للشيت انت وصلت لفين حتى لو مكملتش.';
 
-    parent.insertBefore(label1, startBtn);
-    parent.insertBefore(inp1, startBtn);
-    parent.insertBefore(label2, startBtn);
-    parent.insertBefore(inp2, startBtn);
-    parent.insertBefore(label3, startBtn);
-    parent.insertBefore(modeRow, startBtn);
-    parent.insertBefore(durWrap, startBtn);
-    parent.insertBefore(note, startBtn);
+    place(label1);
+    place(inp1);
+    place(label2);
+    place(inp2);
+    place(label3);
+    place(modeRow);
+    place(durWrap);
+    place(note);
 
     btnTimed.addEventListener('click', function () {
       btnTimed.classList.add('on');
@@ -549,6 +572,8 @@
     if ($('home')) $('home').classList.add('hidden');
     if ($('results')) $('results').classList.add('hidden');
     document.querySelectorAll('.floating-bar').forEach(function (b) { b.classList.add('hidden'); });
+    var side = $('tq-side');
+    if (side) side.classList.add('hidden'); // sticky registration panel (new layout)
     var durText = s.durationMin ? ('خلصت الـ ' + s.durationMin + ' دقيقة، ') : 'انتهى الوقت، ';
     var line = $('tq-timeup-line');
     if (line) {
